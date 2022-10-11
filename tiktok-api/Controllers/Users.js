@@ -119,7 +119,7 @@ class Users {
     async getUserByUsername(req, res) {
         const userId = req.session.userDetails?.userId;
         const { username } = req.params;
-        const user = await this.user.getUserByUsername(username);
+        const user = await this.user.getUserByUsername(username, userId);
 
         if (!user) {
             res.json({
@@ -145,7 +145,11 @@ class Users {
                 name: user.name,
                 username: user.username,
                 imageUrl: user.image_url,
-                bio: user.bio
+                bio: user.bio,
+                followingCount: user.followingCount,
+                followersCount: user.followersCount,
+                likes: 0,
+                isFollowing: user.isFollowing
             },
             videos,
         });

@@ -36,14 +36,17 @@ class Video extends Database {
                 AND privacy_id = 2`, [userId]);
     }
 
-    getVideosForYou() {
+    getVideosForYou(userId = 0) {
         return this.getAll(
-            `SELECT u.username, u.name, u.image_url AS imageUrl, v.id AS videoId, v.video_url AS videoUrl, v.caption, v.created_at 
-                FROM videos v
-                INNER JOIN users u
+            `SELECT DISTINCT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing, v.id AS videoId, v.video_url AS videoUrl, v.caption, v.created_at 
+            FROM videos v
+            INNER JOIN users u
                 ON v.owner_id = u.id
-                WHERE privacy_id = 1
-                AND status_id = 1`, []);
+            LEFT JOIN user_followings uf
+                ON v.owner_id = uf.following_id
+                AND uf.user_id = ?
+            WHERE privacy_id = 1
+                AND status_id = 1`, [userId]);
     }
 }
 

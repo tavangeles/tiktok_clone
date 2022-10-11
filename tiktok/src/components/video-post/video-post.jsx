@@ -4,14 +4,18 @@ import heart from "../../assets/svgs/heart.svg";
 import comment from "../../assets/svgs/comment.svg";
 import "./video-post.styles.scss";
 
-const VideoPost = ({video}) => {
+const VideoPost = ({video, onFollowHandler}) => {
     const targetRef = useRef(null);
     const [isVisible, setIsVisible] = useState("");
-    const { username, name, imageUrl, videoUrl, caption } = video;
+    const { userId, username, name, imageUrl, isFollowing, videoUrl, caption } = video;
 
     const callBackFunction = entries => {
         const [entry] = entries;
         setIsVisible(entry.isIntersecting);
+    }
+
+    const handleFollowClick = () => {
+        onFollowHandler(userId, isFollowing);
     }
 
     const options = useMemo(() => {
@@ -70,7 +74,7 @@ const VideoPost = ({video}) => {
                 </div>
             </div>
             <div className="follow-container">
-                <button>Follow</button>
+                <button onClick={handleFollowClick}>{isFollowing ? "Following" : "Follow"}</button>
             </div>
         </div>
     );

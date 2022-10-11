@@ -4,7 +4,6 @@ const Router = Express.Router();
 const UserController = require("../Controllers/Users");
 
 const { uuid } = require("uuidv4");
-const fs = require("fs");
 const path = require('path');
 
 //move this to another class?

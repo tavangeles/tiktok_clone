@@ -1,6 +1,6 @@
 import { makeRequest } from "./makeRequest";
 
-export function videoGetForYou() {
+export function getVideosForYou() {
     return makeRequest("/videos/foryou");
 }
 

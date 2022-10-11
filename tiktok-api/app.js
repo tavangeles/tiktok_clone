@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const userRouter = require("./Routes/UserRoutes");
 const imageRouter = require("./Routes/ImageRoutes");
 const videoRouter = require("./Routes/VideoRoutes");
+const userFollowingRouter = require("./Routes/UserFollowingRoutes");
 const Database = require("./System/Database");
 const config = require("./config");
 
@@ -14,7 +15,7 @@ const app = express();
 Database.connect(config.database);
 app.use(cors({
     origin: config.clientUrl,
-    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD'],
+    methods: ['POST', 'PUT', 'DELETE', 'GET', 'OPTIONS', 'HEAD'],
     credentials: true
 }));
 
@@ -24,6 +25,7 @@ app.use(session(config.session));
 app.use(userRouter);
 app.use(imageRouter);
 app.use(videoRouter);
+app.use(userFollowingRouter);
 
 app.listen(config.port, function () {
     console.log(`listening on port ${config.port}`);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUserContext, useUserUpdateContext } from "../../hooks/userContext";
 import { useNavigate } from 'react-router-dom';
-import { userGetAccountDetails, userLogin } from "../../services/users";
+import { userLogin } from "../../services/users";
 import "./login.styles.scss";
 
 const defaultFormFields = {

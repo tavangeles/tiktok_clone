@@ -6,7 +6,6 @@ import ProfilePicture from '../../components/profile-picture/profile-picture';
 import tiktokLogo from "../../assets/images/tiktok-logo.png";
 import cross from "../../assets/svgs/cross.svg";
 import search from "../../assets/svgs/search.svg";
-// import notification from "../../assets/svgs/notification.svg";
 import './navigation.styles.scss';
 
 
@@ -16,6 +15,7 @@ const Navigation = () => {
 
     useEffect(() => {
         userGetAccountDetails().then(res => {
+            console.log(res);
             if (res.success) {
                 setUser(res.userDetails);
             }
@@ -33,10 +33,6 @@ const Navigation = () => {
                     <button><img src={search} alt="search" /></button>
                 </div>
                 <div className="navigation-links-container">
-
-                    {/* <Link className="navigation-link-icon" to="/account">
-                        <img src={notification} alt="cross" className="svg" />
-                    </Link> */}
                     {
                         user &&
                         <>

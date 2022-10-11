@@ -11,8 +11,20 @@ class User extends Database {
         return this.get("SELECT id, name, username, image_url, bio, password FROM users WHERE email = ?", [email]);
     }
 
-    getUserByUsername(username) {
-        return this.get("SELECT id, name, username, image_url, bio, password FROM users WHERE username = ?", [username]);
+    getUserByUsername(username, userId = 0) {
+        console.log(userId);
+        return this.get(
+            `SELECT u.id, u.name, u.username, u.image_url, u.bio, u.password, COUNT(following.id) as followingCount, COUNT(followers.id) as followersCount, IF(uf.id IS NULL, false, true) AS isFollowing
+            FROM users u
+            LEFT JOIN user_followings following 
+                ON u.id = following.user_id
+            LEFT JOIN user_followings followers
+                ON u.id = followers.following_id 
+            LEFT JOIN user_followings uf
+                ON u.id = uf.following_id
+                AND uf.user_id = ?
+            WHERE u.username = ?
+            GROUP BY u.id, name, username, image_url, bio, password;`, [userId, username]);
     }
 
     getSuggestedAccounts(userId = 0) {
@@ -45,6 +57,13 @@ class User extends Database {
 
     updateUser(userId, userDetails) {
         const { name, bio, imageUrl } = userDetails;
+        return this.getAll(
+            `UPDATE users 
+            SET name = ?, bio = ?, image_url = ?, updated_at = NOW()
+            WHERE id = ?`, [name, bio, imageUrl, userId]);
+    }
+
+    followUser(userId, followingId) {
         return this.getAll(
             `UPDATE users 
             SET name = ?, bio = ?, image_url = ?, updated_at = NOW()

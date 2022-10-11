@@ -10,6 +10,7 @@ const Sidebar = () => {
     const [suggestedAccounts, setSuggestedAccounts] = useState([]);
     const [followingAccounts, setFollowingAccounts] = useState([]);
 
+
     useEffect(() => {
         userGetSuggestions().then((res) => {
             setSuggestedAccounts(res.suggestedAccounts);

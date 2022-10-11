@@ -98,7 +98,8 @@ class Videos {
     }
 
     async getVideosForYou(req, res) {
-        const videos = await this.video.getVideosForYou();
+        const userId = req.session.userDetails?.userId;
+        const videos = await this.video.getVideosForYou(userId);
         res.json({
             success: true,
             errorMessage: [],

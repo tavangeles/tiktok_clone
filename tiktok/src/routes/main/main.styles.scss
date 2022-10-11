@@ -1,0 +1,10 @@
+.main-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100vw;
+    height: calc(100vh - 64px);
+    padding: 0 25vw;
+    background-color: white;
+    height: auto;
+}

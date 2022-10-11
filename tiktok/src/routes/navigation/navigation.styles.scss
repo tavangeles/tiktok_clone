@@ -1,0 +1,118 @@
+.navigation {
+    background-color: white;
+    width: 100vw;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20vw;
+    border-bottom: 1px solid #e8e8e8;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px -1px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    .svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .navigation-logo-container {
+        display: flex;
+        justify-content: flex-end;
+        
+        img {
+            height: 36px;
+        }
+    }
+
+    .navigation-search-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 340px;
+        height: 40px;
+        border-radius: 24px;
+        border: 1px solid #e8e8e8;
+        outline: transparent;
+        background-color: #f1f1f3;
+        font-size: 18px;
+        color: #656469;
+        
+        input {
+            font-size: 14px;
+            caret-color: red;
+            padding: 0 16px;
+            padding-top: 2px;
+            width: 90%;
+            height: 25px;
+            background-color: transparent;
+            border: none;
+            border-right: 1px solid #c9c9cb;
+            outline: none;
+        }
+
+        &:focus-within {
+            border: 1px solid #c9c9cb;
+        }
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 4px;
+            height: 100%;
+            width: 13%;
+            border-top-right-radius: 24px;
+            border-bottom-right-radius: 24px;
+            border: none;
+            cursor: pointer;
+            &:hover {
+                background-color: #eaeaec;
+            }
+            img {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    }
+
+    .navigation-links-container {
+        height: 40px;
+        width: 300px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 24px;
+
+        .navigation-link-button {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border: 1px solid #e2e2e2;
+            height: 40px;
+            font-weight: 600;
+            
+            &:hover {
+                background-color: #f8f8f8;
+            }
+
+            .svg {
+                margin-right: 4px;
+            }
+        }
+
+        .navigation-link-icon {
+            display: flex;
+            align-items: center;
+            img {
+                width: 32px;
+                height: 32px;
+            }
+        }
+        .navigation-link-profile {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+    }
+}

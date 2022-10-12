@@ -80,7 +80,7 @@ const EditProfile = ({ userDetails, openModalHandler, accountDetailsHandler }) =
                 </div>
                 <div className="footer">
                     <button type="button" onClick={openModalHandler}>Cancel</button>
-                    <button className="active">Save</button>
+                    <button className="btn-primary">Save</button>
                 </div>
             </form>
         </Modal>

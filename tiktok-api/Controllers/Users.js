@@ -8,9 +8,7 @@ class Users {
         this.video = new VideoModel();
     }
     
-    get(req, res) {
-        console.log(req.sessionID);
-        
+    get(req, res) {  
         res.json({
             success: req.session.userDetails ? true : false,
             errorMessage: [],
@@ -21,6 +19,7 @@ class Users {
 
     async create(req, res) {
         const { name, username, emailAddress, password } = req.body;
+        const validationErrors = [];
         //move this validation to another function inside model
         if (!name) {
             validationErrors.push("Email address is required.");
@@ -28,9 +27,9 @@ class Users {
         if (!username) {
             validationErrors.push("Username is required");
         }
-        if (!emailAddress) {
-            validationErrors.push("Email is required.");
-        }
+        // if (!emailAddress) {
+        //     validationErrors.push("Email is required.");
+        // }
         if (!password) {
             validationErrors.push("Password is required.");
         }
@@ -43,6 +42,7 @@ class Users {
             });
             return;
         }
+
         const userDetails = {
             userId:  uuid(),
             name,
@@ -67,7 +67,7 @@ class Users {
         res.json({
             success: true,
             errorMessage: [],
-            newUserDetails
+            userDetails: newUserDetails
         });
     }
 
@@ -132,12 +132,10 @@ class Users {
         }
 
         let videos;
-        console.log(user.id, userId);
         if (user.id === userId) {
             videos = await this.video.getAllVideos(user.id);
         } 
         else {
-            console.log("public videos");
             videos = await this.video.getPublicVideos(user.id);
         }
 
@@ -160,11 +158,11 @@ class Users {
     }
 
     async login(req, res) {
-        const { emailAddress, password } = req.body;
+        const { username, password } = req.body;
         let validationErrors = [];
         //move this validation to another function inside model
-        if (!emailAddress) {
-            validationErrors.push("Email address is required.");
+        if (!username) {
+            validationErrors.push("Username is required.");
         }
         if (!password) {
             validationErrors.push("Password is required.");
@@ -178,7 +176,8 @@ class Users {
             return;
         }
         
-        const user = await this.user.getUserByEmail(emailAddress);
+        const user = await this.user.getUserByUsername(username);
+        console.log(username, user);
         if (!user || !this.user.verifyPassword(password, user.password)) {
             validationErrors.push("Invalid username/password combination.");
             res.json({
@@ -187,6 +186,7 @@ class Users {
             });
             return;
         }
+
         const userDetails = {
             userId: user.id,
             name: user.name,
@@ -201,6 +201,14 @@ class Users {
             errorMessage: validationErrors,
             sessionId: req.sessionID,
             userDetails
+        });
+    }
+
+    logout(req, res) {
+        req.session.destroy();
+        res.json({
+            success: true,
+            errorMessage: [],
         });
     }
 

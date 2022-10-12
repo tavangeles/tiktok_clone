@@ -42,6 +42,10 @@ Router.post("/users/login", function (req, res) {
     new UserController().login(req, res);
 });
 
+Router.post("/users/logout", function (req, res) {
+    new UserController().logout(req, res);
+});
+
 
 
 module.exports = Router;

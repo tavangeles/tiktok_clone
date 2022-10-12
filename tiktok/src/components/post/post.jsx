@@ -68,6 +68,7 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
                     videoUrl={videoUrl}
                     targetRef={targetRef}
                     likesCount={likesCount}
+                    isLiked={isLiked}
                     commentsCount={commentsCount}
                     onLikeHandler={handleLikeClick}
                     onFullScreen={handleVideoClick}

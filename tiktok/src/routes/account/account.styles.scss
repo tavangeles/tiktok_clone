@@ -24,6 +24,10 @@
             .detail-container {
                 display: flex;
                 flex-direction: column;
+                h2 {
+                    font-size: 18px;
+                    font-weight: 400;
+                }
                 button {
                     background-color: transparent;
                     margin-top: 16px;
@@ -36,11 +40,30 @@
                     border-radius: 4px;
                     padding: 8px 16px;
                     font-size: 16px;
-                    font-weight: 700;
+                    font-weight: 600;
+                    font-family: 'Poppins', sans-serif;
                     cursor: pointer;
+                    &:hover {
+                        background-color:#f8f8f8;
+                    }
                     img {
                         height: 32px;
                     }
+                }
+                .btn-primary {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #fc2c53;
+                    color: white;
+                    &:hover {
+                        background-color:#ef2950;
+                    }
+                }
+                .btn-secondary {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                 }
             }
         }
@@ -54,7 +77,11 @@
                     margin-right: 4px;
                 }
             }
-
+            pre {
+                font-size: 16px;
+                font-family: 'Figtree', sans-serif;
+                color: #525755;
+            }
         }
     }
 
@@ -71,6 +98,14 @@
                 width: 192px;
                 height: 248px;
                 object-fit: cover;
+            }
+
+            .caption {
+                height: 36px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: #525755;
             }
         }
     }

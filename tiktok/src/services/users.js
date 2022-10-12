@@ -11,8 +11,14 @@ export function userLogin(formFields) {
     });
 }
 
+export function userLogout() {
+    return makeRequest(`/users/logout`, {
+        method: "POST",
+    });
+}
+
 export function userRegister(formFields) {
-    return makeRequest(`/users/register`, {
+    return makeRequest(`/users`, {
         method: "POST",
         data: formFields,
     });

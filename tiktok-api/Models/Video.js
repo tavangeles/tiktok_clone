@@ -24,7 +24,8 @@ class Video extends Database {
             `SELECT id AS videoId, video_url as videoUrl , caption, privacy_id AS privacyId, created_at AS createdAt
             FROM videos
             WHERE owner_id = ?
-                AND status_id = 1`, [userId]);
+                AND status_id = 1
+            ORDER by created_at DESC`, [userId]);
     }
 
     getPublicVideos(userId) {
@@ -33,7 +34,8 @@ class Video extends Database {
             FROM videos
             WHERE owner_id = ?
                 AND status_id = 1
-                AND privacy_id = 1`, [userId]);
+                AND privacy_id = 1
+            ORDER by created_at DESC`, [userId]);
     }
 
     getVideosForYou(userId = 0) {
@@ -53,7 +55,8 @@ class Video extends Database {
                 ON v.id = likes_count.video_id
             WHERE privacy_id = 1
                 AND status_id = 1
-            GROUP BY userId, u.username, u.name, imageUrl, isFollowing, videoId, videoUrl, isLiked, v.created_at`,
+            GROUP BY userId, u.username, u.name, imageUrl, isFollowing, videoId, videoUrl, isLiked, v.created_at
+            ORDER BY v.created_at desc`,
             [userId, userId]);
     }
 

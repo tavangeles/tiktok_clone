@@ -8,22 +8,25 @@ import ForYou from "./components/for-you/for-you";
 import Upload from "./routes/upload/upload";
 import Following from "./components/following/following";
 import Account from "./routes/account/account";
+import { PageContextProvider } from "./hooks/pageContext";
 
 const App = () => {
     return (
         <UserContextProvider>
-            <Routes>
-                <Route path="/" element={<Navigation />}>
-                    <Route path="/" element={<Main />} >
-                        <Route index element={<ForYou />} />
-                        <Route path="following" element={<Following />} />
+            <PageContextProvider>
+                <Routes>
+                    <Route path="/" element={<Navigation />}>
+                        <Route path="/" element={<Main />} >
+                            <Route index element={<ForYou />} />
+                            <Route path="following" element={<Following />} />
+                        </Route>
+                        <Route path="account/:username" element={<Account />} />
+                        <Route path="upload" element={<Upload />} />
+                        <Route path="login" element={<Login />} />
+                        <Route path="register" element={<Register />} />
                     </Route>
-                    <Route path="account/:username" element={<Account />} />
-                    <Route path="upload" element={<Upload />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="register" element={<Register />} />
-                </Route>
-            </Routes>
+                    </Routes>
+            </PageContextProvider>
         </UserContextProvider>
     );
 };

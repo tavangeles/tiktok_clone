@@ -26,7 +26,7 @@ class User extends Database {
             GROUP BY u.id, name, username, image_url, bio, password;`, [userId, username]);
     }
 
-    getSuggestedAccounts(userId = 0) {
+    getSuggestedAccounts(userId = "") {
         return this.getAll(
             `SELECT distinct u.id, u.username, u.name, u.image_url as imageUrl FROM users u
             LEFT JOIN user_followings uf
@@ -46,12 +46,12 @@ class User extends Database {
 
     createUser(userDetails) {
         const { userId, name, username, emailAddress, password, imageUrl, bio} = userDetails;
-
+        const passwordHash = bcrypt.hashSync(password, 10);
         return this.query(
             `INSERT INTO users 
                 (id, name, username, email, password, image_url, bio, created_at)
             VALUES
-                (?, ?, ?, ?, ?, ?, "", NOW())`, [userId, name, username, emailAddress, password, imageUrl, bio]);
+                (?, ?, ?, ?, ?, ?, "", NOW())`, [userId, name, username, emailAddress, passwordHash, imageUrl, bio]);
     }
 
     updateUser(userId, userDetails) {

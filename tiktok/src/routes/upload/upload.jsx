@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../hooks/userContext";
+import { usePageUpdateContext } from "../../hooks/pageContext";
 import { updateVideoDetails, uploadVideo } from "../../services/videos";
 import ProgressBar from "../../components/progress-bar/progress-bar";
 import cloud from "../../assets/svgs/cloud.svg";
@@ -16,19 +17,20 @@ const defaultFormFields = {
 
 const Upload = () => {
     const user = useUserContext();
+    const setPage = usePageUpdateContext();
     const [formFields, setFormFields] = useState(defaultFormFields);
     const [uploadPercentage, setUploadPercentage] = useState(null);
     const [uploadedVideo, setUploadedVideo] = useState("");
     const [isDiscardModalOpen, setIsDiscardModalOpen] = useState(false);
     const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
-
-    
     const { videoId, filename } = uploadedVideo;
     const { caption, privacy, video } = formFields;
+    const isReady = video && caption;
     const navigate = useNavigate();
 
     useEffect(() => {
+        setPage("Upload")
         if (!user) {
             navigate("/login");
             return;
@@ -53,6 +55,9 @@ const Upload = () => {
     
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if (!isReady) {
+            return;
+        }
         updateVideoDetails(videoId, formFields).then(res => console.log(res));
         handleOpenUploadModal();
     }
@@ -104,12 +109,12 @@ const Upload = () => {
                                     <p>Up to 10 minutes</p>
                                     <p>Less than 2 GB</p>
                                     <div className="button">Select file</div>
-                                <input type="file"
-                                    accept="video/mp4"
-                                    name="video"
-                                    placeholder="Select file"
-                                    onChange={handleChange}
-                                />
+                                    <input type="file"
+                                        accept="video/mp4"
+                                        name="video"
+                                        placeholder="Select file"
+                                        onChange={handleChange}
+                                    />
                                 </>
                             }
                             {uploadPercentage && uploadPercentage < 100 &&
@@ -158,7 +163,7 @@ const Upload = () => {
                         </select>
                         <div>
                             <button type="button" onClick={handleOpenDiscardModal}>Discard</button>
-                            <button className="active">Post</button>
+                            <button className={isReady ? "btn-primary" : "btn-disabled"}>Post</button>
                         </div>
                     </div>
                 </div>

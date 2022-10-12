@@ -1,7 +1,6 @@
 import { makeRequest } from "./makeRequest";
 
 export function likeVideo(videoId) {
-    console.log(videoId);
     return makeRequest(`/likes/video`, {
         method: "POST",
         data: {videoId},

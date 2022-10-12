@@ -4,13 +4,15 @@
     height: 64px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 16px 20vw;
+    padding: 16px;
     border-bottom: 1px solid #e8e8e8;
     box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px -1px;
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
+    @media only screen and (min-width: 1024px) {
+        padding: 16px 16vw 16px 20vw;
+    }
     .svg {
         width: 20px;
         height: 20px;
@@ -22,6 +24,9 @@
         
         img {
             height: 36px;
+        }
+        @media only screen and (min-width: 1024px) {
+            margin-right: 10vw;
         }
     }
 
@@ -77,8 +82,8 @@
     }
 
     .navigation-links-container {
+        margin-left: auto;
         height: 40px;
-        width: 300px;
         display: flex;
         justify-content: flex-start;
         align-items: center;
@@ -87,10 +92,12 @@
         .navigation-link-button {
             display: flex;
             align-items: center;
+            justify-content: center;
             padding: 0 20px;
             border: 1px solid #e2e2e2;
             height: 40px;
             font-weight: 600;
+            width: 112px;
             
             &:hover {
                 background-color: #f8f8f8;
@@ -98,6 +105,15 @@
 
             .svg {
                 margin-right: 4px;
+            }
+        }
+
+        .btn-active {
+            border-radius: 4px;
+            background-color: #fc2c53;
+            color: white;
+            &:hover {
+                background-color:#ef2950;
             }
         }
 

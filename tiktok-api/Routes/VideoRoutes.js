@@ -22,6 +22,10 @@ Router.get("/videos/foryou", function (req, res) {
     new VideoController().getVideosForYou(req, res);
 });
 
+Router.get("/videos/following", function (req, res) {
+    new VideoController().getVideosFollowing(req, res);
+});
+
 Router.get("/videos/:videoId", function (req, res) {
     new VideoController().get(req, res);
 });

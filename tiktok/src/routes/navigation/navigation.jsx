@@ -33,21 +33,22 @@ const Navigation = () => {
                     <button><img src={search} alt="search" /></button>
                 </div>
                 <div className="navigation-links-container">
+                    <Link className="navigation-link-button" to="/upload">
+                        <img src={cross} alt="cross" className="svg" />
+                        Upload
+                    </Link>
                     {
                         user &&
-                        <>
-                            <Link className="navigation-link-button" to="/upload">
-                                <img src={cross} alt="cross" className="svg" />
-                                Upload
-                            </Link>
-                            <Link className="navigation-link-profile" to={`/account/${user.username}`}>
-                                <ProfilePicture imageUrl={user.imageUrl} diameter="32px" />
-                            </Link>
-                        </>
+                        <Link className="navigation-link-profile" to={`/account/${user.username}`}>
+                            <ProfilePicture imageUrl={user.imageUrl} diameter="32px" />
+                        </Link>
                     }
-                    { !user && <Link className="navigation-link-profile" to="/login">
-                        Login
-                    </Link>}
+                    {
+                        !user &&
+                        <Link className="navigation-link-button btn-active" to="/login">
+                            Login
+                        </Link>
+                    }
                 </div>
             </div>
             <Outlet />

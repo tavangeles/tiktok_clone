@@ -1,9 +1,38 @@
+
+import { useEffect, useState } from "react";
+import { getVidoesFollowing } from "../../services/videos";
+import { followUser, unfollowUser } from "../../services/userFollowing";
+import Post from "../post/post";
 import "./following.styles.scss";
 
 const Following = () => {
+    const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+        getVidoesFollowing().then((res) => {
+            setVideos(res.videos);
+        });
+    }, [])
+    
+    const handleFollowUser = (userId, isFollowing) => {
+        if (!isFollowing) {
+            followUser(userId);
+        }
+        else {
+            unfollowUser(userId);
+        }
+
+        setVideos(prevVideos => prevVideos.map(video => {
+                return video.userId === userId ? { ...video, isFollowing: !video.isFollowing } : video;
+            })
+        )
+    }
+
     return (
-        <div className="for-you-container">
-            Following Page
+        <div className="following-container">
+            {videos.map(video => {
+                return <Post key={video.videoId} video={video} onFollowHandler={handleFollowUser} />
+            })}
         </div>
     );
 };

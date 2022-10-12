@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getVideosForYou } from "../../services/videos";
 import { followUser, unfollowUser } from "../../services/userFollowing";
-import VideoPost from "../video-post/video-post";
+import { likeVideo, unlikeVideo } from "../../services/likes";
+import Post from "../post/post";
 import "./for-you.styles.scss";
 
 const ForYou = () => {
@@ -14,12 +15,7 @@ const ForYou = () => {
     }, [])
     
     const handleFollowUser = (userId, isFollowing) => {
-        if (!isFollowing) {
-            followUser(userId);
-        }
-        else {
-            unfollowUser(userId);
-        }
+        isFollowing ? unfollowUser(userId) : followUser(userId);
 
         setVideos(prevVideos => prevVideos.map(video => {
                 return video.userId === userId ? { ...video, isFollowing: !video.isFollowing } : video;
@@ -27,10 +23,30 @@ const ForYou = () => {
         )
     }
 
+    const handleLikeVideo = (videoId, isLiked) => {
+        isLiked ? unlikeVideo(videoId) : likeVideo(videoId);
+        
+        setVideos(prevVideos => prevVideos.map(video => {
+            return video.videoId === videoId ?
+                {
+                    ...video,
+                    isLiked: !video.isLiked,
+                    likesCount: (video.isLiked ? video.likesCount - 1 : video.likesCount + 1)
+                }
+                : video;
+            })
+        )
+    }
+
     return (
         <div className="for-you-container">
             {videos.map(video => {
-                return <VideoPost key={video.videoId} video={video} onFollowHandler={handleFollowUser} />
+                return <Post
+                    key={video.videoId}
+                    video={video}
+                    onFollowHandler={handleFollowUser}
+                    onLikeHandler={handleLikeVideo}
+                />
             })}
         </div>
     );

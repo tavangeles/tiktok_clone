@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useUserContext } from "../../hooks/userContext";
 import { getUserDetails } from "../../services/users";
@@ -8,6 +8,7 @@ import ProfilePicture from "../../components/profile-picture/profile-picture";
 import Sidebar from "../../components/sidebar/sidebar";
 import edit from "../../assets/svgs/edit.svg";
 import "./account.styles.scss";
+import Login from "../login/login";
 
 const Account = () => {
     const user = useUserContext();
@@ -16,8 +17,6 @@ const Account = () => {
     const [videos, setVideos] = useState([]);
     const { username } = useParams();
     const { userId, name, imageUrl, bio, followingCount, followersCount, likes, isFollowing} = userDetails;
-
-    const inputRef = useRef();
 
     const handleOpenModal = () => {
         setIsModalOpen(prevState => !prevState);
@@ -41,12 +40,12 @@ const Account = () => {
         })
     }
 
-    const handleMouseOver = () => {
-        inputRef.current.play();
+    const handleMouseOver = (event) => {
+        event.target.play();
     }
 
-    const handleMouseOut = () => {
-        inputRef.current.pause();
+    const handleMouseOut = (event) => {
+        event.target.pause();
     }
 
     useEffect(() => {
@@ -54,7 +53,7 @@ const Account = () => {
             setUserDetails(res.userDetails);
             setVideos(res.videos)
         });
-    }, [])
+    }, [username])
 
     return (
         <>
@@ -86,10 +85,12 @@ const Account = () => {
                             {videos.map((video) => {
                                 return <div key={video.videoId}
                                     className="video-card"
-                                    onMouseOver={handleMouseOver}
-                                    onMouseOut={handleMouseOut}
                                 >
-                                    <video loop muted ref={inputRef}>
+                                    <video loop
+                                        muted
+                                        onMouseOver={handleMouseOver}
+                                        onMouseOut={handleMouseOut}
+                                    >
                                         <source src={`${process.env.REACT_APP_API_URL}videos/${video.videoUrl}`} type="video/mp4" />
                                     </video>
                                     <p>{video.caption}</p>

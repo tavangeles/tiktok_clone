@@ -106,6 +106,16 @@ class Videos {
             videos
         });
     }
+
+    async getVideosFollowing(req, res) {
+        const userId = req.session.userDetails?.userId;
+        const videos = await this.video.getVideosFollowing(userId);
+        res.json({
+            success: true,
+            errorMessage: [],
+            videos
+        });
+    }
 }
 
 module.exports = Videos;

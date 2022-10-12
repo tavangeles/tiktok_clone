@@ -4,6 +4,10 @@ export function getVideosForYou() {
     return makeRequest("/videos/foryou");
 }
 
+export function getVidoesFollowing() {
+    return makeRequest("/videos/following");
+}
+
 export function uploadVideo(formFields, setUploadPercentage) {
     return makeRequest(`/videos`, {
         method: "POST",

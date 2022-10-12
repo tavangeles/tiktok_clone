@@ -1,0 +1,18 @@
+.video-full-screen {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    video {
+        width: 72vw;
+        height: 100vh;
+        background-color: black;
+    }
+    .comments-container {
+        background-color: white;
+        width: 28vw;
+    }
+}

@@ -33,16 +33,37 @@ class Video extends Database {
             FROM videos
             WHERE owner_id = ?
                 AND status_id = 1
-                AND privacy_id = 2`, [userId]);
+                AND privacy_id = 1`, [userId]);
     }
 
     getVideosForYou(userId = 0) {
         return this.getAll(
-            `SELECT DISTINCT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing, v.id AS videoId, v.video_url AS videoUrl, v.caption, v.created_at 
+            `SELECT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing,
+                v.id AS videoId, v.video_url AS videoUrl, v.caption, IF(vl.id IS NULL, false, true) AS isLiked, COUNT(likes_count.id) as likesCount, v.created_at 
             FROM videos v
             INNER JOIN users u
                 ON v.owner_id = u.id
             LEFT JOIN user_followings uf
+                ON v.owner_id = uf.following_id
+                AND uf.user_id = ?
+            LEFT JOIN video_likes vl
+                ON v.id = vl.video_id
+                AND vl.user_id = ?
+            LEFT JOIN video_likes likes_count
+                ON v.id = likes_count.video_id
+            WHERE privacy_id = 1
+                AND status_id = 1
+            GROUP BY userId, u.username, u.name, imageUrl, isFollowing, videoId, videoUrl, isLiked, v.created_at`,
+            [userId, userId]);
+    }
+
+    getVideosFollowing(userId = 0) {
+        return this.getAll(
+            `SELECT DISTINCT u.id as userId, u.username, u.name, u.image_url AS imageUrl, true as isFollowing, v.id AS videoId, v.video_url AS videoUrl, v.caption, v.created_at 
+            FROM videos v
+            INNER JOIN users u
+                ON v.owner_id = u.id
+            INNER JOIN user_followings uf
                 ON v.owner_id = uf.following_id
                 AND uf.user_id = ?
             WHERE privacy_id = 1

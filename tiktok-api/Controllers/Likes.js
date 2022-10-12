@@ -1,14 +1,15 @@
-const UserFollowing = require("../Models/UserFollowing");
+const VideoLikeModel = require("../Models/VideoLike");
+const CommentLikeModel = require("../Models/CommentLike");
 
-
-class UserFollowings {
+class Images {
     constructor() {
-        this.userFollowing = new UserFollowing();
+        this.videoLike = new VideoLikeModel();
+        this.commentLike = new CommentLikeModel();
     }
-    
-    async followUser(req, res) {
+
+    async likeVideo(req, res) {
         const userId = req.session.userDetails?.userId;
-        const { followingId } = req.body;
+        const { videoId } = req.body;
 
         if (!userId) {
             res.json({
@@ -19,16 +20,17 @@ class UserFollowings {
         }
 
 
-        const result = await this.userFollowing.followUser(userId, followingId);
+        const result = await this.videoLike.likeVideo(userId, videoId);
+        
         res.json({
             success: true,
             errorMessage: []
         });
     }
-    
-    async unFollowUser(req, res) {
+
+    async unlikeVideo(req, res) {
         const userId = req.session.userDetails?.userId;
-        const { followingId } = req.body;
+        const { videoId } = req.body;
 
         if (!userId) {
             res.json({
@@ -37,12 +39,23 @@ class UserFollowings {
             });
             return;
         }
-        const result = await this.userFollowing.unfollowUser(userId, followingId);
+
+
+        const result = await this.videoLike.unlikeVideo(userId, videoId);
+
         res.json({
             success: true,
             errorMessage: []
         });
+    }
+
+    async likeComment(req, res) {
+        
+    }
+
+    async unlikeComment(req, res) {
+        
     }
 }
 
-module.exports = UserFollowings;
+module.exports = Images;

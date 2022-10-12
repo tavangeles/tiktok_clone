@@ -7,6 +7,7 @@ const userRouter = require("./Routes/UserRoutes");
 const imageRouter = require("./Routes/ImageRoutes");
 const videoRouter = require("./Routes/VideoRoutes");
 const userFollowingRouter = require("./Routes/UserFollowingRoutes");
+const likeRouter = require("./Routes/LikeRoutes");
 const Database = require("./System/Database");
 const config = require("./config");
 
@@ -26,6 +27,7 @@ app.use(userRouter);
 app.use(imageRouter);
 app.use(videoRouter);
 app.use(userFollowingRouter);
+app.use(likeRouter);
 
 app.listen(config.port, function () {
     console.log(`listening on port ${config.port}`);

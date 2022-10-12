@@ -12,7 +12,6 @@ class User extends Database {
     }
 
     getUserByUsername(username, userId = 0) {
-        console.log(userId);
         return this.get(
             `SELECT u.id, u.name, u.username, u.image_url, u.bio, u.password, COUNT(following.id) as followingCount, COUNT(followers.id) as followersCount, IF(uf.id IS NULL, false, true) AS isFollowing
             FROM users u

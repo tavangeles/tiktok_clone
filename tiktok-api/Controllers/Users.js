@@ -9,6 +9,8 @@ class Users {
     }
     
     get(req, res) {
+        console.log(req.sessionID);
+        
         res.json({
             success: req.session.userDetails ? true : false,
             errorMessage: [],
@@ -130,10 +132,12 @@ class Users {
         }
 
         let videos;
+        console.log(user.id, userId);
         if (user.id === userId) {
             videos = await this.video.getAllVideos(user.id);
         } 
         else {
+            console.log("public videos");
             videos = await this.video.getPublicVideos(user.id);
         }
 

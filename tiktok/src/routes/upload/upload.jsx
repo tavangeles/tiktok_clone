@@ -19,7 +19,11 @@ const Upload = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
     const [uploadPercentage, setUploadPercentage] = useState(null);
     const [uploadedVideo, setUploadedVideo] = useState("");
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDiscardModalOpen, setIsDiscardModalOpen] = useState(false);
+    const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
+    const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+
+    
     const { videoId, filename } = uploadedVideo;
     const { caption, privacy, video } = formFields;
     const navigate = useNavigate();
@@ -33,7 +37,7 @@ const Upload = () => {
 
     useEffect(() => {
         if (formFields.video) {
-            uploadVideo(formFields, setUploadPercentage).then(res => { 
+            uploadVideo(formFields, setUploadPercentage).then(res => {
                 setUploadedVideo(res.data);
             })
         }
@@ -41,34 +45,45 @@ const Upload = () => {
 
     const handleChange = (event) => {
         const { name, value, files } = event.target;
-        const inputValue = name === "video" ? files[0] : value; 
+        const inputValue = name === "video" ? files[0] : value;
         setFormFields(prevFormFields => {
             return { ...prevFormFields, [name]: inputValue }
         });
-        if (video) {
-            
-        }
     }
     
-    const handleCancelClick = (event) => {
-
-    }
-
     const handleSubmit = async (event) => {
-        event.preventDefault();        
-        // validate caption
-        // validate id
-        updateVideoDetails(videoId, formFields).then(res=>console.log(res));
+        event.preventDefault();
+        updateVideoDetails(videoId, formFields).then(res => console.log(res));
+        handleOpenUploadModal();
     }
 
-    const handleReplaceClick = () => {
-        setIsModalOpen(prevState => !prevState);
+    const handleOpenDiscardModal = () => {
+        setIsDiscardModalOpen(prevState => !prevState);
+    }
+
+    const handleCloseReplaceModal = () => {
+        setIsVideoModalOpen(prevState => !prevState);
         setUploadedVideo("");
         setUploadPercentage(null);
     }
 
-    const handleOpenModal = () => {
-        setIsModalOpen(prevState => !prevState);
+    const handleOpenReplaceModal = () => {
+        setIsVideoModalOpen(prevState => !prevState);
+    }
+
+    const handleCloseUploadModal = () => {
+        setIsUploadModalOpen(prevState => !prevState);
+        setUploadedVideo("");
+        setUploadPercentage(null);
+        setFormFields(defaultFormFields);
+    }
+
+    const handleOpenUploadModal = () => {
+        setIsUploadModalOpen(prevState => !prevState);
+    }
+    
+    const handleViewProfile = () => {
+        navigate(`/account/${user.username}`);
     }
 
     return (
@@ -89,7 +104,12 @@ const Upload = () => {
                                     <p>Up to 10 minutes</p>
                                     <p>Less than 2 GB</p>
                                     <div className="button">Select file</div>
-                                    <input type="file" accept="video/mp4" name="video" placeholder="Select file" onChange={handleChange} />
+                                <input type="file"
+                                    accept="video/mp4"
+                                    name="video"
+                                    placeholder="Select file"
+                                    onChange={handleChange}
+                                />
                                 </>
                             }
                             {uploadPercentage && uploadPercentage < 100 &&
@@ -116,7 +136,7 @@ const Upload = () => {
                                     <img src={check} alt="check" />
                                     <span>{video.name}</span>
                                 </p>
-                                <button type="button" onClick={handleOpenModal}>Change video</button>
+                                <button type="button" onClick={handleOpenReplaceModal}>Change video</button>
                             </div>
                         </div>
                     }
@@ -128,6 +148,7 @@ const Upload = () => {
                             placeholder="Caption"
                             onChange={handleChange}
                             value={caption}
+                            required
                             autoComplete="off"
                             />
                         <p className="bold">Who can view this video</p>
@@ -136,19 +157,38 @@ const Upload = () => {
                             <option value="2">Private</option>
                         </select>
                         <div>
-                            <button type="button" onClick={handleCancelClick}>Discard</button>
+                            <button type="button" onClick={handleOpenDiscardModal}>Discard</button>
                             <button className="active">Post</button>
                         </div>
                     </div>
                 </div>
             </form>
-            { isModalOpen &&
-                <Modal onCloseHandler={handleOpenModal}>
+            { isDiscardModalOpen &&
+                <Modal onCloseHandler={handleOpenDiscardModal}>
+                    <div className="popup">
+                        <h2>Discard this post?</h2>
+                        <p>The video and all edits will be discarded.</p>
+                        <button onClick={handleViewProfile}>Discard</button>
+                        <button onClick={handleOpenDiscardModal}>Continue Editing</button>
+                    </div>
+                </Modal>
+            }
+            { isVideoModalOpen &&
+                <Modal onCloseHandler={handleOpenReplaceModal}>
                     <div className="popup">
                         <h2>Replace this video?</h2>
-                        <p>Caption and video settings will still be saved</p>
-                        <button onClick={handleReplaceClick}>Replace</button>
-                        <button onClick={handleOpenModal}>Continue editing</button>
+                        <p>Caption and video settings will still be saved.</p>
+                        <button onClick={handleCloseReplaceModal}>Replace</button>
+                        <button onClick={handleOpenReplaceModal}>Continue editing</button>
+                    </div>
+                </Modal>
+            }
+            { isUploadModalOpen &&
+                <Modal onCloseHandler={handleOpenUploadModal}>
+                    <div className="popup">
+                        <h2>Your video is being uploaded to TikTok!</h2>
+                        <button onClick={handleCloseUploadModal}>Upload another video</button>
+                        <button onClick={handleViewProfile}>View profile</button>
                     </div>
                 </Modal>
             }

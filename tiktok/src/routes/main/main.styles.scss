@@ -1,10 +1,16 @@
 .main-container {
     display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
     width: 100vw;
-    height: calc(100vh - 64px);
-    padding: 0 25vw;
+    min-height: calc(100vh - 64px);
     background-color: white;
-    height: auto;
+    @media only screen and (max-width: 480px) {
+        padding: 0;
+    }
+    @media only screen and (min-width: 481px) {
+        padding: 0;
+    }
+    @media only screen and (min-width: 1024px) {
+        padding-left: 20vw;
+        padding-right: 14vw;
+    }
 }

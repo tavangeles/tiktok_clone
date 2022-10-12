@@ -1,0 +1,21 @@
+.video-container {
+    position: relative;
+    display: flex;
+    gap: 16px;
+    margin-left: 68px;
+    .full-screen-handler {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        background-color: transparent;
+        // height: 520px;
+        // width: 336px;
+        }
+    video {
+        border-radius: 8px;
+        height: 600px;
+        width: 336px;
+        background-color: black;
+    }
+}

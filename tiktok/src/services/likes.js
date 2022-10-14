@@ -14,16 +14,16 @@ export function unlikeVideo(videoId) {
     });
 }
 
-export function likeComment(userId) {
+export function likeComment(commentId) {
     return makeRequest(`/likes/comment`, {
         method: "POST",
-        data: {userId},
+        data: {commentId},
     });
 }
 
-export function unlikeComment(userId) {
+export function unlikeComment(commentId) {
     return makeRequest(`/likes/comment`, {
         method: "DELETE",
-        data: {userId},
+        data: {commentId},
     });
 }

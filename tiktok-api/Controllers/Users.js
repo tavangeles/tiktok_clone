@@ -150,7 +150,7 @@ class Users {
                 bio: user.bio,
                 followingCount: user.followingCount,
                 followersCount: user.followersCount,
-                likes: 0,
+                likes: user.likesCount,
                 isFollowing: user.isFollowing
             },
             videos,
@@ -177,7 +177,6 @@ class Users {
         }
         
         const user = await this.user.getUserByUsername(username);
-        console.log(username, user);
         if (!user || !this.user.verifyPassword(password, user.password)) {
             validationErrors.push("Invalid username/password combination.");
             res.json({

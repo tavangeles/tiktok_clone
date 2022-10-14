@@ -10,7 +10,6 @@ class VideoLike extends Database {
     }
 
     unlikeVideo(userId, videoId) {
-        console.log(userId, videoId);
         return this.query(
             `DELETE FROM video_likes WHERE user_id = ? AND video_id = ?`, [userId, videoId]);
     }

@@ -13,17 +13,15 @@ class User extends Database {
 
     getUserByUsername(username, userId = 0) {
         return this.get(
-            `SELECT u.id, u.name, u.username, u.image_url, u.bio, u.password, COUNT(following.id) as followingCount, COUNT(followers.id) as followersCount, IF(uf.id IS NULL, false, true) AS isFollowing
+            `SELECT u.id, u.name, u.username, u.image_url, u.bio, u.password, IF(uf.id IS NULL, false, true) AS isFollowing,
+            (SELECT COUNT(*) FROM user_followings WHERE user_id = u.id) AS followingCount, 
+            (SELECT COUNT(*) FROM user_followings WHERE following_id = u.id) AS followersCount, 
+            (SELECT COUNT(*) FROM video_likes INNER JOIN videos ON video_id = videos.id WHERE owner_id = u.id) AS likesCount
             FROM users u
-            LEFT JOIN user_followings following 
-                ON u.id = following.user_id
-            LEFT JOIN user_followings followers
-                ON u.id = followers.following_id 
             LEFT JOIN user_followings uf
                 ON u.id = uf.following_id
                 AND uf.user_id = ?
-            WHERE u.username = ?
-            GROUP BY u.id, name, username, image_url, bio, password;`, [userId, username]);
+            WHERE u.username = ?`, [userId, username]);
     }
 
     getSuggestedAccounts(userId = "") {

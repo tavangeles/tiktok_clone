@@ -50,11 +50,45 @@ class Images {
     }
 
     async likeComment(req, res) {
-        
+        const userId = req.session.userDetails?.userId;
+        const { commentId } = req.body;
+
+        if (!userId) {
+            res.json({
+                success: false,
+                errorMessage: "Not authorized"
+            });
+            return;
+        }
+
+
+        const result = await this.commentLike.likeComment(userId, commentId);
+
+        res.json({
+            success: true,
+            errorMessage: []
+        });
     }
 
     async unlikeComment(req, res) {
-        
+        const userId = req.session.userDetails?.userId;
+        const { commentId } = req.body;
+
+        if (!userId) {
+            res.json({
+                success: false,
+                errorMessage: "Not authorized"
+            });
+            return;
+        }
+
+
+        const result = await this.commentLike.unlikeComment(userId, commentId);
+
+        res.json({
+            success: true,
+            errorMessage: []
+        });
     }
 }
 

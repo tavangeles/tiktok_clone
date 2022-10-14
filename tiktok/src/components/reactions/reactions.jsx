@@ -3,7 +3,7 @@ import heartActive from "../../assets/svgs/heart-active.svg";
 import comment from "../../assets/svgs/comment.svg";
 import "./reactions.styles.scss";
 
-const Reactions = ({ isLiked, likesCount, commentsCount, onLikeHandler }) => {
+const Reactions = ({ isLiked, likesCount, commentsCount, onLikeHandler, onCommentHandler }) => {
     return (
         <div className="reactions-container">
             <div>
@@ -11,7 +11,7 @@ const Reactions = ({ isLiked, likesCount, commentsCount, onLikeHandler }) => {
                 <p>{likesCount}</p>
             </div>
             <div>
-                <img src={comment} alt="comment" />
+                <img src={comment} alt="comment" onClick={onCommentHandler} />
                 <p>{commentsCount}</p>
             </div>
         </div>

@@ -9,7 +9,7 @@ const Video = ({ isLiked, videoUrl, likesCount, commentsCount, targetRef, onFull
             <video controls loop ref={targetRef}>
                 <source src={`${process.env.REACT_APP_API_URL}videos/${videoUrl}`} type="video/mp4" />
             </video>
-            <Reactions isLiked={isLiked} likesCount={likesCount} commentsCount={commentsCount} onLikeHandler={onLikeHandler} />
+            <Reactions isLiked={isLiked} likesCount={likesCount} commentsCount={commentsCount} onLikeHandler={onLikeHandler} onCommentHandler={onFullScreen} />
         </div>
     );
 };

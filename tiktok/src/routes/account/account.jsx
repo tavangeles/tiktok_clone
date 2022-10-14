@@ -7,15 +7,19 @@ import { followUser, unfollowUser } from "../../services/userFollowing";
 import EditProfile from "../../components/edit-profile/edit-profile";
 import ProfilePicture from "../../components/profile-picture/profile-picture";
 import Sidebar from "../../components/sidebar/sidebar";
+import VideoFullScreen from "../../components/video-full-screen/video-full-screen";
 import edit from "../../assets/svgs/edit.svg";
+import userIcon from "../../assets/images/user.png";
 import "./account.styles.scss";
 
 const Account = () => {
     const user = useUserContext();
     const setPage = usePageUpdateContext();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFullVideoOpen, setIsFullVideoOpen] = useState(false);
     const [userDetails, setUserDetails] = useState({});
     const [videos, setVideos] = useState([]);
+    const [video, setVideo] = useState({});
     const { username } = useParams();
     const { userId, name, imageUrl, bio, followingCount, followersCount, likes, isFollowing} = userDetails;
 
@@ -64,6 +68,21 @@ const Account = () => {
         event.target.pause();
     }
 
+    const handleFollowClick = () => {
+        // onFollowHandler(userId, isFollowing);
+    }
+
+    const handleVideoClick = (video) => {
+        if (!isFullVideoOpen) {
+            setVideo(video)
+            document.body.style.overflow = "hidden";
+        }
+        else {
+            document.body.style.overflow = "unset";
+        }
+        setIsFullVideoOpen(prev => !prev);
+    }
+
     return (
         <>
             <div className="account-container" style={{ backgroundColor: isModalOpen ? 0.5 : 1 }} >
@@ -91,9 +110,17 @@ const Account = () => {
                     <div className="">
                         <h2>Videos</h2>
                         <div className="videos-container">
+                            { !videos.length &&
+                                <div className="no-content">
+                                    <img src={userIcon} alt="user" />
+                                    <h3>No content</h3>
+                                    <p>This user has not published any videos.</p>
+                                </div>
+                            }
                             {videos.map((video) => {
                                 return <div key={video.videoId}
                                     className="video-card"
+                                    onClick={() =>handleVideoClick(video)}
                                 >
                                     <video loop
                                         muted
@@ -110,6 +137,7 @@ const Account = () => {
                 </div>
             </div>    
             {isModalOpen && <EditProfile userDetails={userDetails} openModalHandler={handleOpenModal} accountDetailsHandler={setAccountDetails} />}
+            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowClick} />}
         </>
     );
 };

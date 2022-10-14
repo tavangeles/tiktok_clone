@@ -24,6 +24,12 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
     }
 
     const handleVideoClick = () => {
+        if (!isFullVideoOpen) {
+            document.body.style.overflow = "hidden";
+        }
+        else {
+            document.body.style.overflow = "unset";
+        }
         setIsFullVideoOpen(prev => !prev);
         targetRef.current.pause()
     }
@@ -74,7 +80,7 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
                     onFullScreen={handleVideoClick}
                 />
             </div>
-            {isFullVideoOpen && <VideoFullScreen />}
+            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowClick} />}
         </>
     );
 };

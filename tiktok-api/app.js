@@ -8,6 +8,7 @@ const imageRouter = require("./Routes/ImageRoutes");
 const videoRouter = require("./Routes/VideoRoutes");
 const userFollowingRouter = require("./Routes/UserFollowingRoutes");
 const likeRouter = require("./Routes/LikeRoutes");
+const commentRouter = require("./Routes/CommentRoutes");
 const Database = require("./System/Database");
 const config = require("./config");
 
@@ -23,10 +24,12 @@ app.use(cors({
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session(config.session));
+
 app.use(userRouter);
 app.use(imageRouter);
 app.use(videoRouter);
 app.use(userFollowingRouter);
+app.use(commentRouter);
 app.use(likeRouter);
 
 app.listen(config.port, function () {

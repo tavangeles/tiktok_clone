@@ -39,7 +39,6 @@ const Register = () => {
         event.preventDefault();
         userRegister(formFields).then(res => {
             if (res.success) {
-                console.log(res.userDetails);
                 setUser(res.userDetails);
                 navigate("/");
             }

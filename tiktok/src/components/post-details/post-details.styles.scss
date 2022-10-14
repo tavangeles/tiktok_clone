@@ -4,25 +4,30 @@
     .details-container {
         display: flex;
         gap: 12px;
-        cursor: pointer;
-        &:hover .username {
-            text-decoration: underline;
-        }
+
         .username {
             display: inline;
             font-size: 16px;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             margin-right: 4px;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
         }
         .name {
             display: inline;
             font-size: 14px;
             color: #66605f;
+            cursor: pointer;
+            &:hover .username {
+                text-decoration: underline;
+            }
         }
         .caption {
             white-space: pre-wrap;
-            width: 480px;
+            max-width: 480px;
             margin-top: 4px;
             font-size: 16px;
             color: #525755;

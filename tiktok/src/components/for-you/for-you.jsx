@@ -16,6 +16,13 @@ const ForYou = () => {
             setVideos(res.videos);
         });
     }, [])
+
+    const scrollToTop = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      };
     
     const handleFollowUser = (userId, isFollowing) => {
         isFollowing ? unfollowUser(userId) : followUser(userId);
@@ -51,6 +58,7 @@ const ForYou = () => {
                     onLikeHandler={handleLikeVideo}
                 />
             })}
+            {/* <button className="btn-scroll"onClick={scrollToTop}>to top</button> */}
         </div>
     );
 };

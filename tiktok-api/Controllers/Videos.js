@@ -98,6 +98,17 @@ class Videos {
         })
     }
 
+    async search(req, res) {
+        const { search } = req.params;
+
+        const result = await this.video.searchVideo(search);
+        res.json({
+            success: true,
+            errorMessage: [],
+            videos: result
+        });
+    }
+
     async getVideosForYou(req, res) {
         const userId = req.session.userDetails?.userId;
         const videos = await this.video.getVideosForYou(userId);

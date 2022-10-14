@@ -118,6 +118,18 @@ class Users {
         });
     }
 
+    async search(req, res) {
+        const { search } = req.params;
+
+        const result = await this.user.searchUser(search);
+
+        res.json({
+            success: true,
+            errorMessage: [],
+            users: result
+        });
+    }
+
     async getUserByUsername(req, res) {
         const userId = req.session.userDetails?.userId;
         const { username } = req.params;

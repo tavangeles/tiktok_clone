@@ -42,6 +42,17 @@ class User extends Database {
             WHERE uf.user_id = ?`, [userId]);
     }
 
+    searchUser(search) {
+        return this.query(
+            `SELECT u.id AS userId, u.name, u.username, u.bio, u.image_url AS imageUrl, COUNT(uf.id) AS followersCount
+            FROM users u
+            LEFT JOIN user_followings uf
+                ON u.id = uf.following_id
+            WHERE username LIKE ? OR name LIKE ?
+            GROUP BY userId, u.name, u.username, u.bio, imageUrl
+            ORDER by followersCount DESC`, [`%${search}%`, `%${search}%`]);
+    }
+
     createUser(userDetails) {
         const { userId, name, username, emailAddress, password, imageUrl, bio} = userDetails;
         const passwordHash = bcrypt.hashSync(password, 10);

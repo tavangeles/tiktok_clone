@@ -18,6 +18,10 @@ const videoUpload = multer({
     storage: videoStorage
 }).single("video");
 
+Router.get("/videos/search/:search", function (req, res) {
+    new VideoController().search(req, res);
+});
+
 Router.get("/videos/foryou", function (req, res) {
     new VideoController().getVideosForYou(req, res);
 });

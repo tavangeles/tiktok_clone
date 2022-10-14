@@ -16,7 +16,22 @@ class Video extends Database {
             
     updateVideo(videoId, videoDetails) {
         const { caption, privacy } = videoDetails;
-        return this.query(`UPDATE videos SET caption = ?, privacy_id = ?, status_id = 1, updated_at = NOW() WHERE id = ?`, [caption, privacy, videoId])
+        return this.query(`UPDATE videos SET caption = ?, privacy_id = ?, status_id = 1, updated_at = NOW() WHERE id = ?`, [caption, privacy, videoId]);
+    }
+
+    searchVideo(search) {
+        return this.query(
+            `SELECT v.id as videoId, v.caption, v.video_url AS videoUrl, v.created_at AS createdAt, u.id AS userId, u.name, u.username, u.image_url as imageUrl, COUNT(vl.id) AS likesCount 
+            FROM videos v
+            INNER JOIN users u
+                ON v.owner_id = u.id
+            LEFT JOIN video_likes vl
+                ON v.id = vl.video_id
+            WHERE v.caption LIKE ?
+                OR u.name LIKE ?
+                OR u.username LIKE ?
+            GROUP BY videoId, v.caption, createdAt, userId, u.name, u.username, imageUrl
+            ORDER BY likesCount DESC, createdAt DESC`, [`%${search}%`, `%${search}%`, `%${search}%`]);
     }
 
     getAllVideos(userId) {

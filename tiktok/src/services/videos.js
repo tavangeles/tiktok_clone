@@ -25,3 +25,7 @@ export function updateVideoDetails(videoId, formFields) {
         data: formFields,
     });
 }
+
+export function videoSearch(search) {
+    return makeRequest(`/videos/search/${search}`);
+}

@@ -22,6 +22,10 @@ Router.get("/users", function (req, res) {
     new UserController().get(req, res);
 });
 
+Router.get("/users/search/:search", function (req, res) {
+    new UserController().search(req, res);
+});
+
 Router.post("/users", function (req, res) {
     new UserController().create(req, res);
 });

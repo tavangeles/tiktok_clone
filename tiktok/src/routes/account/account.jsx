@@ -68,10 +68,6 @@ const Account = () => {
         event.target.pause();
     }
 
-    const handleFollowClick = () => {
-        // onFollowHandler(userId, isFollowing);
-    }
-
     const handleVideoClick = (video) => {
         if (!isFullVideoOpen) {
             setVideo(video)
@@ -137,7 +133,7 @@ const Account = () => {
                 </div>
             </div>    
             {isModalOpen && <EditProfile userDetails={userDetails} openModalHandler={handleOpenModal} accountDetailsHandler={setAccountDetails} />}
-            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowClick} />}
+            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowUser} />}
         </>
     );
 };

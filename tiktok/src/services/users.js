@@ -39,3 +39,7 @@ export function updateUser(formFields) {
         headers: { 'Content-Type': 'multipart/form-data' },
     });
 }
+
+export function userSearch(search) {
+    return makeRequest(`/users/search/${search}`);
+}

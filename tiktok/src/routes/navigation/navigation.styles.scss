@@ -161,13 +161,16 @@
         padding: 12px 16px;
         width: 100%;
         cursor: pointer;
+        &:hover {
+            background-color: #f8f8f8;
+        }
         img {
             width: 22px;
             height: 22px;
         }
-        &:hover {
-            background-color: #e8e8e8;
-        }
+    }
+    & > p:last-child {
+        border-top: 1px solid #e8e8e8;
     }
 }
   

@@ -6,12 +6,16 @@ import "./reactions.styles.scss";
 const Reactions = ({ isLiked, likesCount, commentsCount, onLikeHandler, onCommentHandler }) => {
     return (
         <div className="reactions-container">
-            <div>
-                <img src={!isLiked ? heart : heartActive} alt="heart" onClick={onLikeHandler} />
+            <div onClick={onLikeHandler}>
+                <div className="reaction-container">
+                    <img src={!isLiked ? heart : heartActive} alt="heart" />
+                </div>
                 <p>{likesCount}</p>
             </div>
-            <div>
-                <img src={comment} alt="comment" onClick={onCommentHandler} />
+            <div onClick={onCommentHandler} >
+                <div className="reaction-container">
+                    <img src={comment} alt="comment" />
+                </div>
                 <p>{commentsCount}</p>
             </div>
         </div>

@@ -1,23 +1,33 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../hooks/userContext";
+import { useNavigate } from "react-router-dom";
+import { usePageContext } from "../../hooks/pageContext";
 import { createVideoComment, getVideoComments } from "../../services/comments";
 import { likeComment, unlikeComment } from "../../services/likes";
+import { formatTimeDiff } from "../../helpers/date";
 import Comment from "../comment/comment";
-import PostDetails from "../post-details/post-details";
+import ProfilePicture from "../profile-picture/profile-picture";
+import Reactions from "../reactions/reactions";
 import close from "../../assets/svgs/close-white.svg";
 import "./video-full-screen.styles.scss";
 
-const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler }) => {
+const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler }) => {
     const user = useUserContext();
+    const page = usePageContext();
+    const navigate = useNavigate();
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
-    const { username, name, imageUrl, isFollowing, videoId, videoUrl, caption, isLiked, likesCount, commentsCount = 0 } = video;
-    
+    const { username, name, imageUrl, isFollowing, videoId, videoUrl, caption, isLiked, likesCount, commentsCount = 0, createdAt } = video;
+
     useEffect(() => {
         getVideoComments(videoId).then(res => {
             setComments(res.comments);
         })
     }, [])
+
+    const handleNavigate = () => {
+        navigate(`/account/${username}`)
+    }
 
     const handleCommentLike = (commentId, isCommentLiked) => {
         setComments(prevComments => {
@@ -70,15 +80,19 @@ const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler }) => {
             <video loop autoPlay controls controlslist="nofullscreen">
                 <source src={`${process.env.REACT_APP_API_URL}videos/${videoUrl}`} type="video/mp4" />
             </video>
-            <div className="details-container">
-                <PostDetails 
-                    imageUrl={imageUrl}
-                    username={username}
-                    name={name}
-                    caption={caption}
-                    isFollowing={isFollowing}
-                    onFollowHandler={onFollowHandler}
-                />
+            <div className="video-details-container">
+                <div className="details-container">
+                    <div className="profile-details">
+                        <ProfilePicture imageUrl={imageUrl} diameter="56px" onClick={handleNavigate}/>
+                        <div>
+                            <p className="username" onClick={handleNavigate}>{username}</p>
+                            <p className="name" onClick={handleNavigate}>{name}<span className="post-date">{formatTimeDiff(createdAt)}</span></p>
+                        </div>
+                        {page !== "Following" && <button className={isFollowing ? "button-active" : ""} onClick={onFollowHandler}>{isFollowing ? "Following" : "Follow"}</button>}
+                    </div>
+                    <pre className="caption">{caption}</pre>
+                    <Reactions isLiked={isLiked} likesCount={likesCount} commentsCount={commentsCount} onLikeHandler={onLikeHandler} />
+                </div>
                 <div className="comments-container">
                     {comments.map(comment => {
                         return <Comment key={comment.commentId} commentDetails={comment} onLike={handleCommentLike} />

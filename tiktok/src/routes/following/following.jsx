@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { usePageUpdateContext } from "../../hooks/pageContext";
 import { getVidoesFollowing } from "../../services/videos";
 import { followUser, unfollowUser } from "../../services/userFollowing";
-import Post from "../post/post";
+import Post from "../../components/post/post";
 import "./following.styles.scss";
 
 const Following = () => {

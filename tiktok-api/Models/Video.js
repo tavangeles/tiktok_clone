@@ -45,7 +45,7 @@ class Video extends Database {
     getVideosForYou(userId = 0) {
         return this.getAll(
             `SELECT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing,
-                v.id AS videoId, v.video_url AS videoUrl, v.caption, IF(vl.id IS NULL, false, true) AS isLiked, v.created_at,
+                v.id AS videoId, v.video_url AS videoUrl, v.caption, IF(vl.id IS NULL, false, true) AS isLiked, v.created_at AS createdAt,
                 (SELECT COUNT(id) FROM video_likes WHERE video_id = v.id) AS likesCount, 
                 (SELECT COUNT(id) FROM video_comments WHERE video_id = v.id) AS commentsCount
             FROM videos v
@@ -66,7 +66,7 @@ class Video extends Database {
     getVideosFollowing(userId = 0) {
         return this.getAll(
             `SELECT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing,
-                v.id AS videoId, v.video_url AS videoUrl, v.caption, IF(vl.id IS NULL, false, true) AS isLiked, v.created_at,
+                v.id AS videoId, v.video_url AS videoUrl, v.caption, IF(vl.id IS NULL, false, true) AS isLiked, v.created_at AS createdAt,
                 (SELECT COUNT(id) FROM video_likes WHERE video_id = v.id) AS likesCount, 
                 (SELECT COUNT(id) FROM video_comments WHERE video_id = v.id) AS commentsCount
             FROM videos v

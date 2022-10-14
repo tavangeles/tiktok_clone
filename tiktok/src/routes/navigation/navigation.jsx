@@ -8,6 +8,7 @@ import tiktokLogo from "../../assets/images/tiktok-logo.png";
 import cross from "../../assets/svgs/cross.svg";
 import search from "../../assets/svgs/search.svg";
 import profile from "../../assets/svgs/profile.svg";
+import settings from "../../assets/svgs/settings.svg";
 import logout from "../../assets/svgs/logout.svg";
 import './navigation.styles.scss';
 
@@ -56,11 +57,10 @@ const Navigation = () => {
                                     <Link className="navigation-link-profile" to={`/account/${user.username}`}>
                                         <p><img src={profile} alt="account" />View Profile</p>
                                     </Link>
+                                    <p><img src={settings} alt="settings" />Settings</p>
                                     <p onClick={handleUserLogout}><img src={logout} alt="logout" />Logout</p>
                                 </div>
                             </div>
-                            
-
                         </>
                     }
                     {

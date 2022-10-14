@@ -3,7 +3,7 @@ import { usePageUpdateContext } from "../../hooks/pageContext";
 import { getVideosForYou } from "../../services/videos";
 import { followUser, unfollowUser } from "../../services/userFollowing";
 import { likeVideo, unlikeVideo } from "../../services/likes";
-import Post from "../post/post";
+import Post from "../../components/post/post";
 import "./for-you.styles.scss";
 
 const ForYou = () => {

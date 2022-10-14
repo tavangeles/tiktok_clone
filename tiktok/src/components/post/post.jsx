@@ -80,7 +80,7 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
                     onFullScreen={handleVideoClick}
                 />
             </div>
-            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowClick} />}
+            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowClick} onLikeHandler={handleLikeClick} />}
         </>
     );
 };

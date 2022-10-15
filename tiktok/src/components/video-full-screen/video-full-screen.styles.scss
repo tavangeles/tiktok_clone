@@ -34,7 +34,7 @@
     }
 
     .video-details-container {
-        background-color: white;
+        background-color: var(--color-white);
         width: 28vw;
         display: flex;
         flex-direction: column;
@@ -136,7 +136,7 @@
             button {
                 height: 40px;
                 padding: 0 16px;
-                background-color: white;
+                background-color: var(--color-white);
                 border: none;
                 cursor: pointer;
             }

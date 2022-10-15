@@ -2,7 +2,7 @@
     display: flex;
     width: 100vw;
     min-height: calc(100vh - 64px);
-    background-color: white;
+    background-color: var(--color-white);
     gap: 48px;
     @media only screen and (max-width: 480px) {
         padding: 0;

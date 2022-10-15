@@ -1,6 +1,6 @@
-
 import { useEffect, useState } from "react";
 import { usePageUpdateContext } from "../../hooks/pageContext";
+import { likeVideo, unlikeVideo } from "../../services/likes";
 import { getVidoesFollowing } from "../../services/videos";
 import { followUser, unfollowUser } from "../../services/userFollowing";
 import Post from "../../components/post/post";
@@ -17,16 +17,27 @@ const Following = () => {
         });
     }, [])
     
+    
     const handleFollowUser = (userId, isFollowing) => {
-        if (!isFollowing) {
-            followUser(userId);
-        }
-        else {
-            unfollowUser(userId);
-        }
+        isFollowing ? unfollowUser(userId) : followUser(userId);
 
         setVideos(prevVideos => prevVideos.map(video => {
                 return video.userId === userId ? { ...video, isFollowing: !video.isFollowing } : video;
+            })
+        )
+    }
+    
+    const handleLikeVideo = (videoId, isLiked) => {
+        isLiked ? unlikeVideo(videoId) : likeVideo(videoId);
+        
+        setVideos(prevVideos => prevVideos.map(video => {
+            return video.videoId === videoId ?
+                {
+                    ...video,
+                    isLiked: !video.isLiked,
+                    likesCount: (video.isLiked ? video.likesCount - 1 : video.likesCount + 1)
+                }
+                : video;
             })
         )
     }
@@ -34,10 +45,16 @@ const Following = () => {
     return (
         <div className="following-container">
             {videos.map(video => {
-                return <Post key={video.videoId} video={video} onFollowHandler={handleFollowUser} />
+                return <Post
+                    key={video.videoId}
+                    video={video}
+                    onFollowHandler={handleFollowUser}
+                    onLikeHandler={handleLikeVideo}
+                />
             })}
         </div>
     );
 };
+
 
 export default Following;

@@ -105,7 +105,7 @@ class Video extends Database {
             FROM videos v
             INNER JOIN users u
                 ON v.owner_id = u.id
-            LEFT JOIN user_followings uf
+            INNER JOIN user_followings uf
                 ON v.owner_id = uf.following_id
                 AND uf.user_id = ?
             LEFT JOIN video_likes vl

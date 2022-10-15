@@ -69,7 +69,7 @@ const Navigation = () => {
                         Upload
                     </Link>
                     {
-                        user &&
+                        user ?
                         <>
                             <div class="dropdown">
                                 <ProfilePicture imageUrl={user.imageUrl} diameter="32px" />
@@ -81,10 +81,7 @@ const Navigation = () => {
                                     <p onClick={handleUserLogout}><img src={logout} alt="logout" />Logout</p>
                                 </div>
                             </div>
-                        </>
-                    }
-                    {
-                        !user &&
+                        </> :
                         <Link className={`navigation-link-button btn-primary`} to="/login">
                             Login
                         </Link>

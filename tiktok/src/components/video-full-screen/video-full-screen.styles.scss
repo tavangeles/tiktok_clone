@@ -85,7 +85,21 @@
                         background-color: #fff3f5;
                     }
                 }
-            }
+
+                .dropdown {
+                    margin-left: auto;
+                    .settings-btn {
+                        border: none;
+                        img {
+                            width: 32px;
+                            height: 32px;
+                        }
+                        &:hover {
+                            background-color: transparent;
+                        }
+                    }
+                    }
+                }
             .caption {
                 white-space: pre-wrap;
                 line-height: 1.6;

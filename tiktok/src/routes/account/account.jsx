@@ -8,7 +8,8 @@ import EditProfile from "../../components/edit-profile/edit-profile";
 import ProfilePicture from "../../components/profile-picture/profile-picture";
 import Sidebar from "../../components/sidebar/sidebar";
 import VideoFullScreen from "../../components/video-full-screen/video-full-screen";
-import edit from "../../assets/svgs/edit.svg";
+import editIcon from "../../assets/svgs/edit.svg";
+import heartIcon from "../../assets/images/heart.png";
 import userIcon from "../../assets/images/user.png";
 import "./account.styles.scss";
 
@@ -90,7 +91,7 @@ const Account = () => {
                             <h1>{username}</h1>
                             <h2>{name}</h2>
                             {user?.username === username ?
-                                <button onClick={handleOpenModal}><img src={edit} alt="edit" />Edit profile</button> : 
+                                <button onClick={handleOpenModal}><img src={editIcon} alt="edit" />Edit profile</button> : 
                                 <button className= {!isFollowing ? "btn-primary" : "btn-secondary"} onClick={handleFollowUser}>{isFollowing ? "Following" : "Follow"}</button>
                             }
                         </div>
@@ -125,6 +126,7 @@ const Account = () => {
                                     >
                                         <source src={`${process.env.REACT_APP_API_URL}videos/${video.videoUrl}`} type="video/mp4" />
                                     </video>
+                                    {/* <img src={heartIcon} alt="heart" /> */}
                                     <p className="caption">{video.caption}</p>
                                 </div>
                             })}

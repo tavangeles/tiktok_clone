@@ -1,41 +1,23 @@
 .post-details-container {
     display: flex;
     justify-content: space-between;
-    .details-container {
+    .user {
         display: flex;
         gap: 12px;
-
-        .username {
-            display: inline;
-            font-size: 16px;
-            font-weight: 600;
-            font-family: 'Poppins', sans-serif;
-            margin-right: 4px;
-            cursor: pointer;
-            &:hover {
-                text-decoration: underline;
+        div {
+            .username {
+                display: inline;
+                margin-right: 4px;
+                cursor: pointer;
+                &:hover {
+                    text-decoration: underline;
+                }
             }
-        }
-        .name {
-            display: inline;
-            font-size: 14px;
-            color: #66605f;
-            cursor: pointer;
-            &:hover .username {
-                text-decoration: underline;
+            .name {
+                display: inline;
+                font-size: 14px;
+                cursor: pointer;
             }
-        }
-        .caption {
-            white-space: pre-wrap;
-            line-height: 1.6;
-            max-width: 480px;
-            margin-top: 4px;
-            margin-bottom: 8px;
-            font-size: 16px;
-            color: #525755;
-            cursor: default;
-            font-size: 16px;
-            font-family: 'Figtree', sans-serif;
         }
     }
 

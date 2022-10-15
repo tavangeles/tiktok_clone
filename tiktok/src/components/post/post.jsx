@@ -24,12 +24,12 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
     }
 
     const handleVideoClick = () => {
-        if (!isFullVideoOpen) {
-            document.body.style.overflow = "hidden";
-        }
-        else {
-            document.body.style.overflow = "unset";
-        }
+        // if (!isFullVideoOpen) {
+        //     document.body.style.overflow = "hidden";
+        // }
+        // else {
+        //     document.body.style.overflow = "unset";
+        // }
         setIsFullVideoOpen(prev => !prev);
         targetRef.current.pause()
     }

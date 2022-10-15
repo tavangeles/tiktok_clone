@@ -26,20 +26,33 @@ class User extends Database {
 
     getSuggestedAccounts(userId = "") {
         return this.getAll(
-            `SELECT distinct u.id, u.username, u.name, u.image_url as imageUrl FROM users u
+            `SELECT u.id, 
+                u.username, 
+                u.name, 
+                u.image_url as imageUrl, 
+                (SELECT COUNT(id) FROM user_followings WHERE following_id = u.id) AS followingsCount
+            FROM users u
             LEFT JOIN user_followings uf
                 ON u.id = uf.following_id
                 AND uf.user_id = ?
             WHERE uf.id IS NULL
-            AND u.id != ?`, [userId, userId]);
+            AND u.id != ?
+            ORDER BY followingsCount DESC
+            LIMIT 10`, [userId, userId]);
     }
     
     getFollowingAccounts(userId) {
          return this.getAll(
-            `SELECT u.id, u.username, u.name, u.image_url as imageUrl FROM users u
+            `SELECT u.id, 
+                u.username, 
+                u.name, 
+                u.image_url as imageUrl
+            FROM users u
             INNER JOIN user_followings uf
                 ON u.id = uf.following_id
-            WHERE uf.user_id = ?`, [userId]);
+            WHERE uf.user_id = ?
+            ORDER BY uf.created_at DESC
+            LIMIT 10`, [userId]);
     }
 
     searchUser(search) {

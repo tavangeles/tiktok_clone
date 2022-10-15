@@ -1,13 +1,12 @@
-
 *
 {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
-  
+
 body {
-    color: #252028;
+    color: var(--color-black);
     margin: 0;
     min-height: 100vh;
     font-family: 'Figtree', sans-serif;
@@ -33,4 +32,17 @@ h1, h2, .bold {
 
 .dim {
     opacity: 1;
+}
+
+:root {
+    // pink
+    --color-primary-1: #fc2c53;
+
+    // gray
+    --color-gray-1: #525755;
+    --color-gray-2: #66605f; //side menu title
+    --color-gray-3: #ababad;
+    --color-gray-4: #e8e8e8; //border-bottom of menu / hover of menu
+
+    --color-black: #252028;
 }

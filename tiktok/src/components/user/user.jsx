@@ -2,7 +2,7 @@ import ProfilePicture from "../profile-picture/profile-picture";
 import { useNavigate } from 'react-router-dom';
 import "./user.styles.scss";
 
-const User = ({ user }) => {
+const User = ({ user, pictureDiameter, children }) => {
     const { imageUrl, username, name } = user;
     const navigate = useNavigate();
 
@@ -11,11 +11,12 @@ const User = ({ user }) => {
     }
 
     return (
-        <div className="user-container" onClick={handleClick}>
-            <ProfilePicture imageUrl={imageUrl} diameter="32px"/>
+        <div className="user">
+            <ProfilePicture imageUrl={imageUrl} diameter={pictureDiameter} onClick={handleClick}/>
             <div>
-                <p className="username">{username}</p>
-                <p className="name">{name}</p>
+                <p className="username" onClick={handleClick}>{username}</p>
+                <p className="name" onClick={handleClick}>{name}</p>
+                {children}
             </div>
         </div>
     );

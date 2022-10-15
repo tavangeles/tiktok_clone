@@ -1,0 +1,19 @@
+.sidebar-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    height: 48px;
+    transition: all ease-in .2s;
+    &:hover {
+        background-color: var(--color-gray-4);
+    }
+    img {
+        margin-left: 8px;
+        width: 28px;
+    }
+    &.link-active {
+        color: var(--color-primary-1);
+    }
+}

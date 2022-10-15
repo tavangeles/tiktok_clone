@@ -109,12 +109,21 @@
             width: 192px;
             height: 280px;
             margin-bottom: 16px;
+            position: relative;
             video {
                 border-radius: 6px;
                 width: 192px;
                 height: 248px;
                 object-fit: cover;
             }
+            // svg {
+            //     position: absolute;
+            //     top: 190px;
+            //     left: 0;
+            //     z-index: 10;
+            //     height: 32px;
+            //     width: 32px;
+            // }
 
             .caption {
                 height: 36px;

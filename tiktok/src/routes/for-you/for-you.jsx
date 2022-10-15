@@ -11,7 +11,7 @@ const ForYou = () => {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
-        setPage("Foryou");
+        setPage("For You");
         getVideosForYou().then((res) => {
             setVideos(res.videos);
         });

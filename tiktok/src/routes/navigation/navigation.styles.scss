@@ -1,180 +1,28 @@
 .navigation {
-    background-color: white;
-    width: 100vw;
-    height: 64px;
+    position: sticky;
     display: flex;
     align-items: center;
-    padding: 16px;
-    border-bottom: 1px solid #e8e8e8;
-    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px -1px;
-    position: sticky;
     top: 0;
+    width: 100vw;
+    height: 64px;
+    padding: 16px;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-4);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 2px -1px;
     z-index: 2;
     @media only screen and (min-width: 1024px) {
         padding: 16px 22vw 16px 20vw;
     }
-    .svg {
-        width: 20px;
-        height: 20px;
-    }
 
-    .navigation-logo-container {
+    .navigation-links {
         display: flex;
-        justify-content: flex-end;
-        
-        img {
-            height: 36px;
-        }
-        @media only screen and (min-width: 1024px) {
-            margin-right: 10vw;
-        }
-    }
-
-    .navigation-search-container {
-        display: flex;
-        justify-content: flex-start;
         align-items: center;
-        width: 340px;
-        height: 40px;
-        border-radius: 24px;
-        border: 1px solid #e8e8e8;
-        outline: transparent;
-        background-color: #f1f1f3;
-        font-size: 18px;
-        color: #656469;
-        
-        input {
-            font-size: 14px;
-            caret-color: red;
-            color:#6e6d72;
-            padding: 0 16px;
-            padding-top: 2px;
-            width: 90%;
-            height: 25px;
-            background-color: transparent;
-            border: none;
-            border-right: 1px solid #c9c9cb;
-            outline: none;
-        }
-
-        &:focus-within {
-            border: 1px solid #c9c9cb;
-        }
-
-        button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 4px;
-            height: 100%;
-            width: 13%;
-            border-top-right-radius: 24px;
-            border-bottom-right-radius: 24px;
-            border: none;
-            cursor: pointer;
-            &:hover {
-                background-color: #eaeaec;
-            }
-            img {
-                width: 24px;
-                height: 24px;
-            }
-        }
-    }
-
-    .navigation-links-container {
+        height: 40px;        
         margin-left: auto;
-        height: 40px;
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
         gap: 24px;
-
-        .navigation-link-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-            border: 1px solid #e2e2e2;
-            height: 40px;
-            font-weight: 600;
-            width: 112px;
-            &.link-active {
-                background-color: #f1f1f3;
-            }
-            &:hover {
-                background-color: #f8f8f8;
-            }
-
-            .svg {
-                margin-right: 4px;
-            }
-        }
-
-        .btn-primary {
-            border-radius: 4px;
-            background-color: #fc2c53;
-            color: white;
-            &:hover {
-                background-color:#ef2950;
-            }
-        }
-
-        .navigation-link-icon {
-            display: flex;
-            align-items: center;
-            img {
-                width: 32px;
-                height: 32px;
-            }
-        }
-        .navigation-link-profile {
-            height: 100%;
-            display: flex;
-            align-items: center;
-        }
     }
-}
 
-.dropdown {
-    position: relative;
-    cursor: pointer;
-}
-  
-.dropdown-content {
-    border-radius: 8px;
-    display: none;
-    position: absolute;
-    right: 0px;
-    background-color: white;
-    min-width: 160px;
-    max-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 2;
-    padding: 4px 0;
-    p {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        height: 40px;
-        font-weight: 600;
-        gap: 8px;
-        padding: 12px 16px;
-        width: 100%;
-        cursor: pointer;
-        &:hover {
-            background-color: #f8f8f8;
-        }
-        img {
-            width: 22px;
-            height: 22px;
-        }
+    .dropdown {
+        margin-top: 4px;
     }
-    & > p:last-child {
-        border-top: 1px solid #e8e8e8;
-    }
-}
-  
-.dropdown:hover .dropdown-content {
-    display: block;
 }

@@ -3,6 +3,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    // outline: 1px dotted gray;
 }
 
 body {
@@ -12,7 +13,7 @@ body {
     font-family: 'Figtree', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f8f8f8;
+    background-color: var(--color-gray-5);
 }
 
 code {
@@ -37,12 +38,16 @@ h1, h2, .bold {
 :root {
     // pink
     --color-primary-1: #fc2c53;
+    --color-primary-2: #ef2950;
 
     // gray
     --color-gray-1: #525755;
     --color-gray-2: #66605f; //side menu title
-    --color-gray-3: #ababad;
+    --color-gray-3: #656469; //navigation search font color
     --color-gray-4: #e8e8e8; //border-bottom of menu / hover of menu
+    --color-gray-5: #f8f8f8; //button secondary color on hover;
+    --color-gray-6: #f1f1f3; //navigation search background color
 
-    --color-black: #252028;
+    --color-black: #252028; 
+    --color-white: #FFFF;
 }

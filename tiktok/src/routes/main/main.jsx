@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import "./main.styles.scss";
 import Sidebar from "../../components/sidebar/sidebar";
+import "./main.styles.scss";
 
 const Main = () => {
     return (

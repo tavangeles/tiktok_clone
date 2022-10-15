@@ -11,7 +11,7 @@ const Sidebar = () => {
     useEffect(() => {
         userGetSuggestions().then((res) => {
             setSuggestedAccounts(res.suggestedAccounts);
-            setFollowingAccounts(res.followingAccounts);   
+            setFollowingAccounts(res.followingAccounts);
         });
     }, [])
 

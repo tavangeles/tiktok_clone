@@ -2,6 +2,7 @@ import User from "../user/user";
 import "./sidebar-users.styles.scss";
 
 const SidebarUsers = ({ title, users }) => {
+    console.log(users);
     return (
         users.length > 0 && <div className="sidebar-users">
             <h3>{title}</h3>

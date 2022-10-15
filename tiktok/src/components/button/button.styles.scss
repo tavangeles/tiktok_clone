@@ -1,0 +1,36 @@
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    height: 40px;
+    min-width: 112px;
+    cursor: pointer;
+    img {
+        height: 24px;
+        width: 24px;
+        margin-right: 4px;
+    }
+    &-primary {
+        background-color: var(--color-primary-1);
+        border: 1px solid var(--color-gray-4);
+        color: var(--color-white);
+        &:hover {
+            background-color: var(--color-primary-2);
+        }
+        a {
+            color: var(--color-white);
+        }
+    }
+    &-secondary {
+        background-color: transparent;
+        border: 1px solid var(--color-gray-4);
+        &:hover {
+            background-color: var(--color-gray-5);
+        }
+    }
+}

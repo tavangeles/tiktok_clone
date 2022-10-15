@@ -6,6 +6,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 10;
+
     .close-btn {
         display: flex;
         justify-content: center;
@@ -25,118 +26,85 @@
             width: 28px;
         }
     }
+
     video {
         width: 72vw;
         height: 100vh;
         background-color: #121212;
     }
+
     .video-details-container {
         background-color: white;
         width: 28vw;
         display: flex;
         flex-direction: column;
+        gap: 16px;
 
-        .details-container {
-            padding: 40px 40px 0px 40px;
+        .video-details {
+            padding: 40px 40px 0 40px;
             display: flex;
-            flex-direction: column;
-            gap: 16px;
-            .profile-details {
+            .user {
                 display: flex;
-                gap: 16px;
-                .username {
-                    font-size: 16px;
-                    font-weight: 600;
-                    font-family: "Poppins", sans-serif;
-                    margin-right: 4px;
-                    cursor: pointer;
-                    &:hover {
-                        text-decoration: underline;
-                    }
-                }
-                .name {
-                    display: inline;
-                    font-size: 14px;
-                    color: #66605f;
-                    cursor: pointer;
-                }
-                .post-date {
-                    font-size: 14px;
-                    &:before {
-                        content: " . "
-                    }
-                }
-                button {
-                    margin-left: auto;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 88px;
-                    height: 32px;;
-                    color: #fc2c53;
-                    background-color: transparent;
-                    font-size: 14px;
-                    font-weight: 600;
-                    font-family: "Poppins", sans-serif;
-                    cursor: pointer;
-                    border: 1px solid #fc2c53;
-                    border-radius: 4px;
-                    &:hover {
-                        background-color: #fff3f5;
-                    }
-                }
-
-                .dropdown {
-                    margin-left: auto;
-                    .settings-btn {
-                        border: none;
-                        img {
-                            width: 32px;
-                            height: 32px;
-                        }
+                align-items: center;
+                gap: 12px;
+                div {
+                    .username {
+                        margin-right: 4px;
+                        cursor: pointer;
                         &:hover {
-                            background-color: transparent;
+                            text-decoration: underline;
                         }
                     }
+                    .name {
+                        font-size: 14px;
+                        cursor: pointer;
+                        color: var(--color-black);
+                        .details {
+                            position: relative;
+                            padding-left: 8px;
+                            &:before {
+                                content: ".";
+                                position:absolute;
+                                left: 2px;
+                                top: -4px;
+                                font-weight: 400;
+                            }
+                        }
                     }
                 }
-            .caption {
-                white-space: pre-wrap;
-                line-height: 1.6;
-                max-width: 480px;
-                margin-top: 4px;
-                font-size: 16px;
-                color: #525755;
-                cursor: default;
-                font-size: 16px;
-                font-family: "Figtree", sans-serif;
             }
 
-            .reactions-container {
+            .btn {
+                margin-left: auto;
+            }
+        }
+        .caption {
+            margin-left: 40px;
+        }
+        .reactions {
+            margin-left: 40px;
+            flex-direction: row;
+            justify-content: flex-start;
+            gap: 32px;
+            .reaction {
+                display: flex;
                 flex-direction: row;
-                justify-content: flex-start;
-                margin-bottom: 16px;
-                gap: 16px;
                 div {
-                    display: flex;
-                    flex-direction: row;
-                    .reaction-container {
-                        height: 32px;
-                        width: 32px;
-                        img {
-                            height: 18px;
-                            width: 18px;
-                        }
+                    height: 32px;
+                    width: 32px;
+                    img {
+                        height: 18px;
+                        width: 18px;
                     }
                 }
             }
         }
 
-        .comments-container {
+        .comments {
             flex: 1 1 auto;
             border-top: 1px solid #d8d8d8; 
             border-bottom: 1px solid #d8d8d8; 
-            background-color: #f8f8f8;
+            background-color: var(--color-gray-5);
             overflow-y: scroll;
             padding: 24px;
             display: flex;
@@ -144,11 +112,14 @@
             gap: 24px;
         }
         
-        .comment-box {
+        .comment-form {
             display: flex;
-            padding: 0 24px;
             align-items: center;
-            flex: 0 0 80px;
+            justify-content: center;
+            padding-bottom: 32px;
+            padding-left: 32px;
+            padding-right: 32px;
+            flex: 0 0 60px;
             input {
                 height: 40px;
                 flex: 1 1 auto;

@@ -14,7 +14,8 @@ const PostDetails = ({ imageUrl, username, name, caption, isFollowing, onFollowH
             </User>
             {
                 page !== "Following" &&
-                <Button buttonType={isFollowing ? "secondary" : "inverted"} onClick={onFollowHandler}>{isFollowing ? "Following" : "Follow"}</Button>}
+                <Button buttonType={isFollowing ? "secondary" : "inverted"} onClick={onFollowHandler}>{isFollowing ? "Following" : "Follow"}</Button>
+            }
         </div>
     );
 };

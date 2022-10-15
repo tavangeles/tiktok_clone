@@ -11,5 +11,15 @@
             color: var(--color-gray-2);
             cursor: pointer;
         }
+        .details { 
+            &:before {
+                content: " . ";
+                position:absolute;
+                left: 2px;
+                top: -4px;
+                color: #8b7f86;
+                font-weight: 400;
+            }
+        }
     }
 }

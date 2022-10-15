@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../../hooks/userContext";
-import { useNavigate } from "react-router-dom";
-import { usePageContext } from "../../hooks/pageContext";
 import { createVideoComment, getVideoComments } from "../../services/comments";
 import { likeComment, unlikeComment } from "../../services/likes";
 import { formatTimeDiff } from "../../helpers/date";
-import ProfilePicture from "../profile-picture/profile-picture";
+import Button from "../button/button";
+import User from "../user/user";
 import Comment from "../comment/comment";
 import Reactions from "../reactions/reactions";
+import Caption from "../caption/caption";
 import Modal from "../modal/modal";
 import closeIcon from "../../assets/svgs/close-white.svg";
 import settingsIcon from "../../assets/svgs/dots.svg";
@@ -15,22 +15,16 @@ import "./video-full-screen.styles.scss";
 
 const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler }) => {
     const user = useUserContext();
-    const page = usePageContext();
-    const navigate = useNavigate();
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-    console.log(video);
-    const { userId, username, name, imageUrl, isFollowing, videoId, videoUrl, caption, isLiked, likesCount, commentsCount = 0, createdAt } = video;
+    const { username, name, imageUrl, isFollowing, videoId, videoUrl, caption, isLiked, likesCount, commentsCount = 0, createdAt } = video;
+
     useEffect(() => {
         getVideoComments(videoId).then(res => {
             setComments(res.comments);
         })
     }, [])
-
-    const handleNavigate = () => {
-        navigate(`/account/${username}`)
-    }
 
     const handleCommentLike = (commentId, isCommentLiked) => {
         setComments(prevComments => {
@@ -82,61 +76,54 @@ const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler
     }
 
     return (
-        <div className="video-full-screen">
-            <button onClick={onCloseHandler} className="close-btn"><img src={closeIcon} alt="close" /></button>
-            <video loop autoPlay controls controlslist="nofullscreen">
-                <source src={`${process.env.REACT_APP_API_URL}videos/${videoUrl}`} type="video/mp4" />
-            </video>
-            <div className="video-details-container">
-                <div className="details-container">
-                    <div className="profile-details">
-                        <ProfilePicture imageUrl={imageUrl} diameter="56px" onClick={handleNavigate}/>
-                        <div>
-                            <p className="username" onClick={handleNavigate}>{username}</p>
-                            <p className="name" onClick={handleNavigate}>{name}<span className="post-date">{formatTimeDiff(createdAt)}</span></p>
-                        </div>
+        <>
+            <div className="video-full-screen">
+                <button onClick={onCloseHandler} className="close-btn"><img src={closeIcon} alt="close" /></button>
+                <video loop autoPlay controls controlslist="nofullscreen">
+                    <source src={`${process.env.REACT_APP_API_URL}videos/${videoUrl}`} type="video/mp4" />
+                </video>
+                <div className="video-details-container">
+                    <div className="video-details">
+                        <User user={{ imageUrl, username, name }} pictureDiameter="40px" details={formatTimeDiff(createdAt)} />
                         {
-                            user?.userId !== video.userId &&
-                            <button className={isFollowing ? "button-active" : ""} onClick={onFollowHandler}>{isFollowing ? "Following" : "Follow"}</button>}
-                        {
-                            user?.userId === video.userId && 
-                            <>
-                                <div class="dropdown">
-                                    <button className="settings-btn" onClick={handleSettingsClick}><img src={settingsIcon} alt="settings" /></button>
-                                    <div class="dropdown-content">
-                                        <p onClick={handleSettingsClick}>Privacy Settings</p>
-                                        <p>Delete</p>
+                            user?.userId !== video.userId ?
+                                <Button buttonType={isFollowing ? "secondary" : "inverted"} onClick={onFollowHandler}>{isFollowing ? "Following" : "Follow"}</Button> :
+                                <>
+                                    <div class="dropdown">
+                                        <button className="settings-btn" onClick={handleSettingsClick}><img src={settingsIcon} alt="settings" /></button>
+                                        <div class="dropdown-content">
+                                            <p onClick={handleSettingsClick}>Privacy Settings</p>
+                                            <p>Delete</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </>
+                                </>
                         }
                     </div>
-                    <pre className="caption">{caption}</pre>
+                    <Caption>{caption}</Caption>
                     <Reactions isLiked={isLiked} likesCount={likesCount} commentsCount={commentsCount} onLikeHandler={onLikeHandler} />
+                    <div className="comments">
+                        {comments.map(comment => {
+                            return <Comment key={comment.commentId} commentDetails={comment} onLike={handleCommentLike} />
+                        })}
+                    </div>
+                    <form className="comment-form" onSubmit={handleSubmit}>
+                        <input 
+                            type="text"
+                            placeholder="Add comment..."
+                            onChange={(event) => setComment(event.target.value)}
+                            value={comment}
+                        />
+                        <button>Post</button>
+                    </form>
                 </div>
-                <div className="comments-container">
-                    {comments.map(comment => {
-                        return <Comment key={comment.commentId} commentDetails={comment} onLike={handleCommentLike} />
-                    })}
-                </div>
-                <form className="comment-box" onSubmit={handleSubmit}>
-                    <input 
-                        type="text"
-                        placeholder="Add comment..."
-                        onChange={(event) => setComment(event.target.value)}
-                        value={comment}
-                    />
-                    <button>Post</button>
-                </form>
-            </div>
-            {isSettingsOpen &&
-                <Modal>
-                    <h1>hi</h1>
-                </Modal>
-            } 
-        </div >
+                {isSettingsOpen &&
+                    <Modal>
+                        <h1>hi</h1>
+                    </Modal>
+                } 
+            </div >
+        </>
     )
 };
 
 export default VideoFullScreen;
-

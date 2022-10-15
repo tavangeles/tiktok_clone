@@ -74,7 +74,6 @@ const Search = () => {
                 <div className="search-videos-container">
                     {
                         videos.map((video) => {
-                            console.log(video);
                             return <div key={video.videoId}
                                 className="video-card"
                                 onClick={() =>handleVideoClick(video)}

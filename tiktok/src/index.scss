@@ -10,14 +10,14 @@ body {
     color: var(--color-black);
     margin: 0;
     min-height: 100vh;
-    font-family: 'Figtree', sans-serif;
+    font-family: "Figtree", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: var(--color-gray-5);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -28,7 +28,7 @@ a {
 
 h1, h2, .bold {
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
 }
 
 .dim {
@@ -41,7 +41,7 @@ h1, h2, .bold {
     --color-primary-2: #ef2950;
 
     // gray
-    --color-gray-1: #525755;
+    --color-gray-1: #525755; //caption-pre
     --color-gray-2: #66605f; //side menu title
     --color-gray-3: #656469; //navigation search font color
     --color-gray-4: #e8e8e8; //border-bottom of menu / hover of menu

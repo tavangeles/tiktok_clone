@@ -7,6 +7,7 @@ export function getVideoComments(videoId) {
 export function createVideoComment(videoId, comment) {
     return makeRequest(`/comments/video`, {
         method: "POST",
-        data: {videoId, comment},
+        data: { videoId, comment },
+        withCredentials: true
     });
 }

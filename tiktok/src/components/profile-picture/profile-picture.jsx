@@ -6,7 +6,8 @@ const ProfilePicture = ({imageUrl, diameter, isObjectUrl}) => {
             className="profile-picture"
             src={isObjectUrl ? imageUrl : `${process.env.REACT_APP_API_URL}images/profile_pictures/${imageUrl}`}
             alt="profile-pic"
-            style={{ width: diameter, height: diameter }} />
+            style={{ width: diameter, height: diameter }}
+        />
     );
 };
 

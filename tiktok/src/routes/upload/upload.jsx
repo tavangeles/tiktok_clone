@@ -93,7 +93,7 @@ const Upload = () => {
 
     return (
         <>
-            <form className="upload-container" onSubmit={handleSubmit}>
+            <form className="upload" onSubmit={handleSubmit}>
                 <h2>Upload video</h2>
                 <p className="description">Post a video to your account</p>
                 <div className="container">
@@ -133,7 +133,7 @@ const Upload = () => {
                     }
                     {filename &&
                         <div className="video-player-container">
-                            <video id="videoPlayer" width="100%" height="512px" controls autoPlay muted loop>
+                            <video width="100%" height="512px" controls autoPlay muted loop>
                                 <source src={`http://localhost:8000/videos/${filename}`} type="video/mp4" />
                             </video>
                             <div className="change-video-container">

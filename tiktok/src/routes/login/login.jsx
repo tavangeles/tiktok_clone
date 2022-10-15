@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUserContext, useUserUpdateContext } from "../../hooks/userContext";
 import { usePageUpdateContext } from "../../hooks/pageContext";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { userLogin } from "../../services/users";
 import "./login.styles.scss";
 
@@ -75,7 +75,7 @@ const Login = () => {
                 <button className={isReady ? "btn-primary" : "btn-disabled"}>Log in</button>
             </form>
             <div className="footer">
-                <p>Don't have an account?</p>
+                <p>Don"t have an account?</p>
                 <button onClick={goToRegisterHandler}>Sign up</button>
             </div>
         </div>

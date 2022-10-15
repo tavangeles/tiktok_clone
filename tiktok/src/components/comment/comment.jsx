@@ -28,4 +28,3 @@ const Comment = ({ commentDetails, onLike }) => {
 };
 
 export default Comment;
-

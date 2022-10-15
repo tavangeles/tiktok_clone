@@ -8,12 +8,14 @@ export function userLogin(formFields) {
     return makeRequest(`/users/login`, {
         method: "POST",
         data: formFields,
+        withCredentials: true
     });
 }
 
 export function userLogout() {
     return makeRequest(`/users/logout`, {
         method: "POST",
+        withCredentials: true
     });
 }
 
@@ -21,6 +23,7 @@ export function userRegister(formFields) {
     return makeRequest(`/users`, {
         method: "POST",
         data: formFields,
+        withCredentials: true
     });
 }
 
@@ -36,7 +39,7 @@ export function updateUser(formFields) {
     return makeRequest(`/users`, {
         method: "PUT",
         data: formFields,
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { "Content-Type": "multipart/form-data" },
     });
 }
 

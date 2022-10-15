@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import './progress-bar.styles.scss';
+import React, { useEffect, useState, useRef } from "react";
+import "./progress-bar.styles.scss";
 
 const ProgressBar = (props) => {
     const [offset, setOffset] = useState(0);
@@ -20,7 +20,7 @@ const ProgressBar = (props) => {
         const progressOffset = ((100 - progress) / 100) * circumference;
         setOffset(progressOffset);
 
-        circleRef.current.style = 'transition: stroke-dashoffset 850ms ease-in-out';
+        circleRef.current.style = "transition: stroke-dashoffset 850ms ease-in-out";
 
     }, [setOffset, progress, circumference, offset]);
 

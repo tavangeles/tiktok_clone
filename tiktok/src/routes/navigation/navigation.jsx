@@ -1,18 +1,18 @@
-import { useEffect } from 'react';
-import { Outlet, Link, useNavigate } from 'react-router-dom';
-import { useUserContext, useUserUpdateContext } from '../../hooks/userContext';
-import { userLogout, userGetAccountDetails } from '../../services/users';
-import { usePageContext } from '../../hooks/pageContext';
-import Button from '../../components/button/button';
-import Logo from '../../components/logo/logo';
-import Dropdown from '../../components/dropdown/dropdown';
-import ProfilePicture from '../../components/profile-picture/profile-picture';
-import NavigationSearch from '../../components/navigation-search/navigation-search';
+import { useEffect } from "react";
+import { Outlet, Link, useNavigate } from "react-router-dom";
+import { useUserContext, useUserUpdateContext } from "../../hooks/userContext";
+import { userLogout, userGetAccountDetails } from "../../services/users";
+import { usePageContext } from "../../hooks/pageContext";
+import Button from "../../components/button/button";
+import Logo from "../../components/logo/logo";
+import Dropdown from "../../components/dropdown/dropdown";
+import ProfilePicture from "../../components/profile-picture/profile-picture";
+import NavigationSearch from "../../components/navigation-search/navigation-search";
 import cross from "../../assets/svgs/cross.svg";
 import profile from "../../assets/svgs/profile.svg";
 import settings from "../../assets/svgs/settings.svg";
 import logout from "../../assets/svgs/logout.svg";
-import './navigation.styles.scss';
+import "./navigation.styles.scss";
 
 
 const Navigation = () => {

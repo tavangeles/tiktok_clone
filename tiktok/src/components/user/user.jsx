@@ -1,5 +1,5 @@
 import ProfilePicture from "../profile-picture/profile-picture";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./user.styles.scss";
 
 const User = ({ user, pictureDiameter, children }) => {

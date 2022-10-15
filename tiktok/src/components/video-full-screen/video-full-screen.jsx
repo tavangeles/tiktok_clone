@@ -8,10 +8,10 @@ import { formatTimeDiff } from "../../helpers/date";
 import ProfilePicture from "../profile-picture/profile-picture";
 import Comment from "../comment/comment";
 import Reactions from "../reactions/reactions";
+import Modal from "../modal/modal";
 import closeIcon from "../../assets/svgs/close-white.svg";
 import settingsIcon from "../../assets/svgs/dots.svg";
 import "./video-full-screen.styles.scss";
-import Modal from "../modal/modal";
 
 const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler }) => {
     const user = useUserContext();

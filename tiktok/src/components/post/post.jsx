@@ -37,7 +37,7 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
     const options = useMemo(() => {
         return {
             root: null,
-            rootMargin: '-50% 0px',
+            rootMargin: "-50% 0px",
             treshhold: 0.5
         }
     });
@@ -61,7 +61,7 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
 
     return (
         <>          
-            <div className="post-container">
+            <div className="post">
                 <PostDetails
                     imageUrl={imageUrl}
                     username={username}

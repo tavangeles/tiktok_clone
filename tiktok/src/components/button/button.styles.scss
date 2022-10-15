@@ -5,9 +5,9 @@
     padding: 0 20px;
     border-radius: 4px;
     font-weight: 600;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     font-size: 14px;
-    height: 40px;
+    height: 32px;
     min-width: 112px;
     cursor: pointer;
     img {
@@ -33,4 +33,40 @@
             background-color: var(--color-gray-5);
         }
     }
+    &-inverted {
+        background-color: transparent;
+        color: var(--color-primary-1);
+        border: 1px solid var(--color-primary-1);
+        &:hover {
+            background-color: var(--color-gray-4);
+        }
+    }
 }
+
+
+// button {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     width: 88px;
+//     height: 32px;;
+//     color: #fc2c53;
+//     background-color: transparent;
+//     font-size: 14px;
+//     font-weight: 600;
+//     font-family: "Poppins", sans-serif;
+//     cursor: pointer;
+//     border: 1px solid #fc2c53;
+//     border-radius: 4px;
+//     &:hover {
+//         background-color: #fff3f5;
+//     }
+// }
+
+// .button-active {
+//     border: 1px solid #ececec;
+//     color: black;
+//     &:hover {
+//         background-color:#f8f8f8;
+//     }
+// }

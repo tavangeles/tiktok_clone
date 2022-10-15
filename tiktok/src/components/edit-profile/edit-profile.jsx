@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { updateUser } from '../../services/users';
+import { useState } from "react";
+import { updateUser } from "../../services/users";
 import { useUserContext, useUserUpdateContext } from "../../hooks/userContext";
-import ProfilePicture from '../profile-picture/profile-picture';
-import Modal from '../modal/modal';
+import ProfilePicture from "../profile-picture/profile-picture";
+import Modal from "../modal/modal";
 import close from "../../assets/svgs/close.svg";
 import change from "../../assets/svgs/change.svg";
 import "./edit-profile.styles.scss";

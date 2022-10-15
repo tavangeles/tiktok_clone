@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useUserContext, useUserUpdateContext } from "../../hooks/userContext";
 import { usePageUpdateContext } from "../../hooks/pageContext";
 import { userRegister } from "../../services/users";
@@ -46,7 +46,7 @@ const Register = () => {
     }
 
     const goToLoginHandler = () => {
-        navigate('/login');
+        navigate("/login");
     };
 
     return (

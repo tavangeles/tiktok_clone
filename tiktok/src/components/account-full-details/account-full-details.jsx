@@ -1,5 +1,5 @@
 import ProfilePicture from "../profile-picture/profile-picture";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./account-full-details.styles.scss";
 
 const AccountFullDetails = ({ user }) => {

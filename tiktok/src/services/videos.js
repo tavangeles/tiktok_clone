@@ -12,7 +12,7 @@ export function uploadVideo(formFields, setUploadPercentage) {
     return makeRequest(`/videos`, {
         method: "POST",
         data: formFields,
-        headers: { 'Content-Type': 'multipart/form-data' },
+        headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (data) => {
              setUploadPercentage(Math.round((data.loaded / data.total) * 100));
         }

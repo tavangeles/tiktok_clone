@@ -48,7 +48,6 @@ class Videos {
         const { filename } = req.file;
         const { caption, privacy } = req.body;
         const result = await this.video.createVideo(userId, { filename, caption, privacy });
-        console.log(result.insertId, filename)
         res.json({
             success: true,
             errorMessage: [],

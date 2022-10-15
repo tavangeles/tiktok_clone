@@ -9,7 +9,6 @@ import ProfilePicture from "../../components/profile-picture/profile-picture";
 import Sidebar from "../../components/sidebar/sidebar";
 import VideoFullScreen from "../../components/video-full-screen/video-full-screen";
 import editIcon from "../../assets/svgs/edit.svg";
-import heartIcon from "../../assets/images/heart.png";
 import userIcon from "../../assets/images/user.png";
 import "./account.styles.scss";
 

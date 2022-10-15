@@ -4,7 +4,7 @@ import "./logo.styles.scss";
 
 const Logo = () => {
     return (
-        <Link className="logo" to='/'>
+        <Link className="logo" to="/">
             <img src={tiktokLogo} alt="tiktok"/>
         </Link>
     );

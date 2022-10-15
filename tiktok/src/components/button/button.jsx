@@ -4,6 +4,7 @@ export const BUTTON_TYPE_CLASSES = {
     primary: "btn-primary",
     secondary: "btn-secondary",
     inverted: "btn-inverted",
+    active: "btn-active",
 };
 
 const Button = ({children, buttonType, ...otherProps }) => {

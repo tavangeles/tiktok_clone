@@ -4,6 +4,7 @@ import { useUserContext } from "../../hooks/userContext";
 import { usePageUpdateContext } from "../../hooks/pageContext";
 import { getUserDetails } from "../../services/users";
 import { followUser, unfollowUser } from "../../services/userFollowing";
+import { likeVideo, unlikeVideo } from "../../services/likes";
 import EditProfile from "../../components/edit-profile/edit-profile";
 import ProfilePicture from "../../components/profile-picture/profile-picture";
 import Sidebar from "../../components/sidebar/sidebar";
@@ -19,12 +20,14 @@ const Account = () => {
     const [isFullVideoOpen, setIsFullVideoOpen] = useState(false);
     const [userDetails, setUserDetails] = useState({});
     const [videos, setVideos] = useState([]);
-    const [video, setVideo] = useState({});
+    const [videoId, setVideoId] = useState({});
+    const selectedVideo = videos.find(video=>video.videoId = videoId)
     const { username } = useParams();
     const { userId, name, imageUrl, bio, followingCount, followersCount, likes, isFollowing} = userDetails;
 
     useEffect(() => {
         setPage("Account");
+        document.body.style.overflow = "unset";
     }, [])
     
     useEffect(() => {
@@ -58,6 +61,14 @@ const Account = () => {
                 followersCount: prevUserDetails.isFollowing ? prevUserDetails.followersCount - 1 : prevUserDetails.followersCount + 1
             };
         })
+        
+        setVideos(prevVideos => prevVideos.map(video => {
+                return {
+                    ...video,
+                    isFollowing: !isFollowing,
+                }
+            })
+        )
     }
 
     const handleMouseOver = (event) => {
@@ -68,9 +79,24 @@ const Account = () => {
         event.target.pause();
     }
 
+    const handleLikeClick = () => {
+        const { videoId, isLiked } = selectedVideo;
+        isLiked ? unlikeVideo(videoId) : likeVideo(videoId);
+        
+        setVideos(prevVideos => prevVideos.map(video => {
+            return video.videoId === videoId ?
+                {
+                    ...video,
+                    isLiked: !video.isLiked,
+                    likesCount: (video.isLiked ? video.likesCount - 1 : video.likesCount + 1)
+                }
+                : video;
+            })
+        )
+    }
     const handleVideoClick = (video) => {
         if (!isFullVideoOpen) {
-            setVideo(video)
+            setVideoId(video.videoId);
             document.body.style.overflow = "hidden";
         }
         else {
@@ -125,7 +151,6 @@ const Account = () => {
                                     >
                                         <source src={`${process.env.REACT_APP_API_URL}videos/${video.videoUrl}`} type="video/mp4" />
                                     </video>
-                                    {/* <img src={heartIcon} alt="heart" /> */}
                                     <p className="caption">{video.caption}</p>
                                 </div>
                             })}
@@ -134,7 +159,7 @@ const Account = () => {
                 </div>
             </div>    
             {isModalOpen && <EditProfile userDetails={userDetails} openModalHandler={handleOpenModal} accountDetailsHandler={setAccountDetails} />}
-            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowUser} />}
+            {isFullVideoOpen && <VideoFullScreen video={videos.find(video => video.videoId === videoId )} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowUser} onLikeHandler={handleLikeClick} />}
         </>
     );
 };

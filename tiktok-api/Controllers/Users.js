@@ -145,10 +145,10 @@ class Users {
 
         let videos;
         if (user.id === userId) {
-            videos = await this.video.getAllVideos(user.id);
+            videos = await this.video.getAllVideos(user.id, userId);
         } 
         else {
-            videos = await this.video.getPublicVideos(user.id);
+            videos = await this.video.getPublicVideos(user.id, userId);
         }
 
         res.json({

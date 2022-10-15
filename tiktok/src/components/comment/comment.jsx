@@ -13,7 +13,7 @@ const Comment = ({ commentDetails, onLike }) => {
 
     return (
         <div className="comment">
-        <ProfilePicture imageUrl={imageUrl} diameter="48px" />
+        <ProfilePicture imageUrl={imageUrl} diameter="40px" />
         <div className="comment-details-container">
             <p className="name">{name}</p>
             <p className="comment">{comment}</p>

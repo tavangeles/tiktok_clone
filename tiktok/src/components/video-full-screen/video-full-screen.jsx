@@ -89,9 +89,9 @@ const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler
                             user?.userId !== video.userId ?
                                 <Button buttonType={isFollowing ? "secondary" : "inverted"} onClick={onFollowHandler}>{isFollowing ? "Following" : "Follow"}</Button> :
                                 <>
-                                    <div class="dropdown">
+                                    <div className="dropdown">
                                         <button className="settings-btn" onClick={handleSettingsClick}><img src={settingsIcon} alt="settings" /></button>
-                                        <div class="dropdown-content">
+                                        <div className="dropdown-content">
                                             <p onClick={handleSettingsClick}>Privacy Settings</p>
                                             <p>Delete</p>
                                         </div>

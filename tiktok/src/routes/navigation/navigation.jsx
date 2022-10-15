@@ -42,7 +42,7 @@ const Navigation = () => {
                 <NavigationSearch />
                 <div className="navigation-links">
                     <Link to="/upload">
-                        <Button buttonType="secondary">
+                        <Button buttonType={page === "Upload" ? "active" : "secondary"}>
                             <img src={cross} alt="cross" className="svg" /> Upload
                         </Button>
                     </Link>
@@ -50,7 +50,7 @@ const Navigation = () => {
                         user ?
                         <Dropdown>
                             <ProfilePicture imageUrl={user.imageUrl} diameter="32px" />
-                            <div class="dropdown-content">
+                            <div className="dropdown-content">
                                 <Link to={`/account/${user.username}`}>
                                     <p><img src={profile} alt="account" />View Profile</p>
                                 </Link>

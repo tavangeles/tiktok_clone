@@ -155,7 +155,7 @@ const Upload = () => {
                             value={caption}
                             required
                             autoComplete="off"
-                            />
+                        />
                         <p className="bold">Who can view this video</p>
                         <select name="privacy" value={privacy} onChange={handleChange}>
                             <option value="1">Public</option>

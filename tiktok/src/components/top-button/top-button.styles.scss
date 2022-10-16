@@ -1,0 +1,18 @@
+.top-button {
+    cursor: pointer;
+    position: fixed;
+    right: 8px;
+    bottom: 8px;
+    background-color: var(--color-primary-1);
+    border-radius: 50%;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    img{
+        width: 24px;
+        height: 24px;
+    }
+}

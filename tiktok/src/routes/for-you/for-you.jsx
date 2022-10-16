@@ -4,7 +4,9 @@ import { getVideosForYou } from "../../services/videos";
 import { followUser, unfollowUser } from "../../services/userFollowing";
 import { likeVideo, unlikeVideo } from "../../services/likes";
 import Post from "../../components/post/post";
+import arrowUpIcon from "../../assets/svgs/arrow-up.svg";
 import "./for-you.styles.scss";
+import TopButton from "../../components/top-button/top-button";
 
 const ForYou = () => {
     const setPage = usePageUpdateContext();
@@ -33,7 +35,6 @@ const ForYou = () => {
                 setPageNumber(prevPageNumber => prevPageNumber + 1);
                 setIsLoading(true);
                 getVideosForYou(pageNumber + 1).then((res) => {
-                    console.log(res);
                     setVideos(prevVideos => {
                         return res.videos.filter((videoResponse) => {
                             return videos.some(video => video.videoId !== videoResponse.videoId)
@@ -52,12 +53,6 @@ const ForYou = () => {
     const handleGet = () => {
         setPageNumber(pageNumber + 1);
     }
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    };
     
     const handleFollowUser = (userId, isFollowing) => {
         isFollowing ? unfollowUser(userId) : followUser(userId);
@@ -104,7 +99,7 @@ const ForYou = () => {
                     />
                 }
             })}
-            {/* <button className="btn-scroll"onClick={scrollToTop}>to top</button> */}
+            <TopButton />
         </div>
     );
 };

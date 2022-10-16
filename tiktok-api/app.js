@@ -1,8 +1,8 @@
 const express = require("express");
 const session = require("express-session");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-
 const userRouter = require("./Routes/UserRoutes");
 const imageRouter = require("./Routes/ImageRoutes");
 const videoRouter = require("./Routes/VideoRoutes");
@@ -21,9 +21,20 @@ app.use(cors({
     credentials: true
 }));
 
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(session({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session(config.session));
+app.use(express.static(__dirname));
+// app.use(session(config.session));
+app.use(cookieParser());
 
 app.use(userRouter);
 app.use(imageRouter);

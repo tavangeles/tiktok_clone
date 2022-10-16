@@ -1,8 +1,8 @@
 module.exports = {  
     session: {
         secret: "sessionsecret",
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized:true,
         cookie: { maxAge: 60000 }
     },
     

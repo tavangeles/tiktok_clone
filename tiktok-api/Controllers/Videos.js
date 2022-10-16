@@ -35,8 +35,8 @@ class Videos {
 
     
     async create(req, res) {
+        console.log(req.sessionID);
         const userId = req.session.userDetails?.userId;
-        console.log(userId);
         if (!userId || !req.file) {
             res.json({
                 success: false,

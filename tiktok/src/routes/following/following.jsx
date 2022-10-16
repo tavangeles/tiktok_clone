@@ -5,6 +5,7 @@ import { getVidoesFollowing } from "../../services/videos";
 import { followUser, unfollowUser } from "../../services/userFollowing";
 import Post from "../../components/post/post";
 import "./following.styles.scss";
+import TopButton from "../../components/top-button/top-button";
 
 const Following = () => {
     const setPage = usePageUpdateContext();
@@ -93,6 +94,7 @@ const Following = () => {
                     />
                 }
             })}
+             <TopButton />
         </div>
     );
 };

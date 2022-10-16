@@ -34,7 +34,6 @@ const Account = () => {
         getUserDetails(username).then(res => {
             setUserDetails(res.userDetails);
             setVideos(res.videos);
-            console.log(res.videos);
         });
     }, [username])
 

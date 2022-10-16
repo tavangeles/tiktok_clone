@@ -24,11 +24,9 @@ const Search = () => {
         setPage("Search");
         userSearch(search).then(res => {
             setUsers(res.users);
-            console.log(res.users);
         });
         videoSearch(search).then(res => {
             setVideos(res.videos);
-            console.log(res.videos);
         })
     }, [search])
 

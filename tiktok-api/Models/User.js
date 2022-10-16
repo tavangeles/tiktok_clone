@@ -52,7 +52,7 @@ class User extends Database {
                 ON u.id = uf.following_id
             WHERE uf.user_id = ?
             ORDER BY uf.created_at DESC
-            LIMIT 10`, [userId]);
+            LIMIT 8`, [userId]);
     }
 
     searchUser(search) {

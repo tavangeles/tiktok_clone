@@ -79,7 +79,8 @@ const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler
         <>
             <div className="video-full-screen">
                 <button onClick={onCloseHandler} className="close-btn"><img src={closeIcon} alt="close" /></button>
-                <video loop autoPlay controls controlslist="nofullscreen">
+                <video loop autoPlay controls>
+                    {/*  controlslist="nofullscreen" */}
                     <source src={`${process.env.REACT_APP_API_URL}videos/${videoUrl}`} type="video/mp4" />
                 </video>
                 <div className="video-details-container">

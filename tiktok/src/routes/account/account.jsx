@@ -20,8 +20,8 @@ const Account = () => {
     const [isFullVideoOpen, setIsFullVideoOpen] = useState(false);
     const [userDetails, setUserDetails] = useState({});
     const [videos, setVideos] = useState([]);
-    const [videoId, setVideoId] = useState({});
-    const selectedVideo = videos.find(video=>video.videoId = videoId)
+    const [selectedVideoId, setSelectedVideoId] = useState("");
+    const selectedVideo = videos.find(video=> video.videoId === selectedVideoId)
     const { username } = useParams();
     const { userId, name, imageUrl, bio, followingCount, followersCount, likes, isFollowing} = userDetails;
 
@@ -33,7 +33,8 @@ const Account = () => {
     useEffect(() => {
         getUserDetails(username).then(res => {
             setUserDetails(res.userDetails);
-            setVideos(res.videos)
+            setVideos(res.videos);
+            console.log(res.videos);
         });
     }, [username])
 
@@ -80,11 +81,11 @@ const Account = () => {
     }
 
     const handleLikeClick = () => {
-        const { videoId, isLiked } = selectedVideo;
-        isLiked ? unlikeVideo(videoId) : likeVideo(videoId);
+        const { isLiked } = selectedVideo;
+        isLiked ? unlikeVideo(selectedVideoId) : likeVideo(selectedVideoId);
         
         setVideos(prevVideos => prevVideos.map(video => {
-            return video.videoId === videoId ?
+            return video.videoId === selectedVideoId ?
                 {
                     ...video,
                     isLiked: !video.isLiked,
@@ -95,8 +96,9 @@ const Account = () => {
         )
     }
     const handleVideoClick = (video) => {
+        const { videoId } = video;
         if (!isFullVideoOpen) {
-            setVideoId(video.videoId);
+            setSelectedVideoId(videoId);
             document.body.style.overflow = "hidden";
         }
         else {
@@ -159,7 +161,7 @@ const Account = () => {
                 </div>
             </div>    
             {isModalOpen && <EditProfile userDetails={userDetails} openModalHandler={handleOpenModal} accountDetailsHandler={setAccountDetails} />}
-            {isFullVideoOpen && <VideoFullScreen video={videos.find(video => video.videoId === videoId )} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowUser} onLikeHandler={handleLikeClick} />}
+            {isFullVideoOpen && <VideoFullScreen video={videos.find(video => video.videoId === selectedVideoId )} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowUser} onLikeHandler={handleLikeClick} />}
         </>
     );
 };

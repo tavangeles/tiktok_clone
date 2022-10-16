@@ -3,44 +3,53 @@ import { useParams } from "react-router-dom";
 import { usePageUpdateContext } from "../../hooks/pageContext";
 import { userSearch } from "../../services/users";
 import { videoSearch } from "../../services/videos";
+import { likeVideo, unlikeVideo } from "../../services/likes";
+import { followUser, unfollowUser } from "../../services/userFollowing";
 import AccountFullDetails from "../../components/account-full-details/account-full-details";
-import "./search.styles.scss";
 import ProfilePicture from "../../components/profile-picture/profile-picture";
 import VideoFullScreen from "../../components/video-full-screen/video-full-screen";
+import "./search.styles.scss";
+
 
 const Search = () => {
     const { search } = useParams();
     const setPage = usePageUpdateContext();
+    const [isFullVideoOpen, setIsFullVideoOpen] = useState(false);
     const [users, setUsers] = useState([]);
     const [videos, setVideos] = useState([]);
-    const [isFullVideoOpen, setIsFullVideoOpen] = useState(false);
-    const [video, setVideo] = useState({});
+    const [selectedVideoId, setSelectedVideoId] = useState("");
+    const selectedVideo = videos.find(video=>video.videoId === selectedVideoId)
 
     useEffect(() => {
         setPage("Search");
         userSearch(search).then(res => {
             setUsers(res.users);
+            console.log(res.users);
         });
         videoSearch(search).then(res => {
             setVideos(res.videos);
+            console.log(res.videos);
         })
     }, [search])
 
-    // const handleFollowUser = () => {
-    //     if (!isFollowing) {
-    //         followUser(userId);
-    //     }
-    //     else {
-    //         unfollowUser(userId);
-    //     }
-    //     setUserDetails(prevUserDetails => {
-    //         return {
-    //             ...prevUserDetails,
-    //             isFollowing: !prevUserDetails.isFollowing,
-    //             followersCount: prevUserDetails.isFollowing ? prevUserDetails.followersCount - 1 : prevUserDetails.followersCount + 1
-    //         };
-    //     })
-    // }
+    const handleFollowUser = () => {
+        const { userId, isFollowing } = selectedVideo;
+        if (!isFollowing) {
+            followUser(userId);
+        }
+        else {
+            unfollowUser(userId);
+        }
+        setVideos(prevVideos => prevVideos.map(video => {
+            return video.userId === userId ?
+                {
+                    ...video,
+                    isFollowing: !isFollowing,
+                }
+                : video   
+            })
+        )
+    }
 
     const handleMouseOver = (event) => {
         event.target.play();
@@ -50,15 +59,33 @@ const Search = () => {
         event.target.pause();
     }
 
+    const handleLikeClick = () => {
+        const { videoId : id, isLiked } = selectedVideo;
+        isLiked ? unlikeVideo(id) : likeVideo(id);
+        
+        setVideos(prevVideos => prevVideos.map(video => {
+            return video.videoId === id ?
+                {
+                    ...video,
+                    isLiked: !video.isLiked,
+                    likesCount: (video.isLiked ? video.likesCount - 1 : video.likesCount + 1)
+                }
+                : video;
+            })
+        )
+    }
+
     const handleVideoClick = (video) => {
         if (!isFullVideoOpen) {
-            setVideo(video)
+            setSelectedVideoId(video.videoId);
+            document.body.style.overflow = "hidden";
         }
         else {
-            setVideo({});
+            document.body.style.overflow = "unset";
         }
         setIsFullVideoOpen(prev => !prev);
     }
+
     return (
         <>
             <div className="search-container">
@@ -95,7 +122,7 @@ const Search = () => {
                     }
                 </div>
             </div>
-            {isFullVideoOpen && <VideoFullScreen video={video} onCloseHandler={handleVideoClick} onFollowHandler={()=>{}} />}
+            {isFullVideoOpen && <VideoFullScreen video={videos.find(video => video.videoId === selectedVideoId )} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowUser} onLikeHandler={handleLikeClick} />}
         </>
     );
 };

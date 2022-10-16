@@ -63,7 +63,8 @@ class User extends Database {
                 ON u.id = uf.following_id
             WHERE username LIKE ? OR name LIKE ?
             GROUP BY userId, u.name, u.username, u.bio, imageUrl
-            ORDER by followersCount DESC`, [`%${search}%`, `%${search}%`]);
+            ORDER by followersCount DESC
+            LIMIT 5`, [`%${search}%`, `%${search}%`]);
     }
 
     createUser(userDetails) {

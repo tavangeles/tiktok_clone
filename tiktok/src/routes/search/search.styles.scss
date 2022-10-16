@@ -18,7 +18,7 @@
         .video-card {
             width: 192px;
             height: 280px;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
             video {
                 border-radius: 6px;
                 width: 192px;
@@ -26,7 +26,6 @@
                 object-fit: cover;
             }
             .caption {
-                height: 36px;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;

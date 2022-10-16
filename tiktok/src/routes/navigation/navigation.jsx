@@ -53,8 +53,10 @@ const Navigation = () => {
                             <div className="dropdown-content">
                                 <Link to={`/account/${user.username}`}>
                                     <p><img src={profile} alt="account" />View Profile</p>
+                                    </Link>
+                                <Link to={`/settings`}>
+                                    <p><img src={settings} alt="settings" />Settings</p>
                                 </Link>
-                                <p><img src={settings} alt="settings" />Settings</p>
                                 <p onClick={handleUserLogout}><img src={logout} alt="logout" />Logout</p>
                             </div>
                         </Dropdown>

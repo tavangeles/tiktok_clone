@@ -4,7 +4,7 @@ import PostDetails from "../post-details/post-details";
 import Video from "../video/video";
 import "./post.styles.scss";
 
-const Post = ({video, onFollowHandler, onLikeHandler}) => {
+const Post = ({video, onFollowHandler, onLikeHandler, reference}) => {
     const targetRef = useRef(null);
     const [isVisible, setIsVisible] = useState("");
     const [isFullVideoOpen, setIsFullVideoOpen] = useState(false);
@@ -61,7 +61,7 @@ const Post = ({video, onFollowHandler, onLikeHandler}) => {
 
     return (
         <>          
-            <div className="post">
+            <div className="post" ref={reference}>
                 <PostDetails
                     imageUrl={imageUrl}
                     username={username}

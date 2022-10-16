@@ -18,7 +18,7 @@ const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler
     const [comments, setComments] = useState([]);
     const [comment, setComment] = useState("");
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-    const { username, name, imageUrl, isFollowing, videoId, videoUrl, caption, isLiked, likesCount, commentsCount = 0, createdAt } = video;
+    const { userId, username, name, imageUrl, isFollowing, videoId, videoUrl, caption, isLiked, likesCount, commentsCount = 0, createdAt } = video;
 
     useEffect(() => {
         getVideoComments(videoId).then(res => {
@@ -91,9 +91,9 @@ const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler
                                 <Button buttonType={isFollowing ? "secondary" : "inverted"} onClick={onFollowHandler}>{isFollowing ? "Following" : "Follow"}</Button> :
                                 <>
                                     <div className="dropdown">
-                                        <button className="settings-btn" onClick={handleSettingsClick}><img src={settingsIcon} alt="settings" /></button>
+                                        <button className="settings-btn"><img src={settingsIcon} alt="settings" /></button>
                                         <div className="dropdown-content">
-                                            <p onClick={handleSettingsClick}>Privacy Settings</p>
+                                            <p>Privacy Settings</p>
                                             <p>Delete</p>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@ const VideoFullScreen = ({ video, onCloseHandler, onFollowHandler, onLikeHandler
                     <Reactions isLiked={isLiked} likesCount={likesCount} commentsCount={commentsCount} onLikeHandler={onLikeHandler} />
                     <div className="comments">
                         {comments.map(comment => {
-                            return <Comment key={comment.commentId} commentDetails={comment} onLike={handleCommentLike} />
+                            return <Comment key={comment.commentId} commentDetails={comment} onLike={handleCommentLike} ownerId={userId} />
                         })}
                     </div>
                     <form className="comment-form" onSubmit={handleSubmit}>

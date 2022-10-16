@@ -84,7 +84,7 @@ class Video extends Database {
             ORDER BY v.created_at DESC`, [loggedInId, loggedInId, userId]);
     }
 
-    getVideosForYou(userId = 0) {
+    getVideosForYou(userId = 0, pageNumber=1) {
         return this.getAll(
             `SELECT DISTINCT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing,
                 v.id AS videoId, v.video_url AS videoUrl, v.caption, IF(vl.id IS NULL, false, true) AS isLiked, v.created_at AS createdAt,
@@ -101,13 +101,14 @@ class Video extends Database {
                 AND vl.user_id = ?
             WHERE privacy_id = 1
                 AND status_id = 1
-            ORDER BY v.created_at DESC`,
-            [userId, userId]);
+            ORDER BY v.created_at DESC
+            LIMIT ?`,
+            [userId, userId, pageNumber*10]);
     }
 
-    getVideosFollowing(userId = 0) {
+    getVideosFollowing(userId = 0, pageNumber) {
         return this.getAll(
-            `SELECT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing,
+            `SELECT DISTINCT u.id as userId, u.username, u.name, u.image_url AS imageUrl, IF(uf.id IS NULL, false, true) AS isFollowing,
                 v.id AS videoId, v.video_url AS videoUrl, v.caption, IF(vl.id IS NULL, false, true) AS isLiked, v.created_at AS createdAt,
                 (SELECT COUNT(id) FROM video_likes WHERE video_id = v.id) AS likesCount, 
                 (SELECT COUNT(id) FROM video_comments WHERE video_id = v.id) AS commentsCount
@@ -122,8 +123,9 @@ class Video extends Database {
                 AND vl.user_id = ?
             WHERE privacy_id = 1
                 AND status_id = 1
-            ORDER BY v.created_at DESC`,
-            [userId, userId]);
+            ORDER BY v.created_at DESC
+            LIMIT ?`,
+            [userId, userId, pageNumber*10]);
     }
 }
 

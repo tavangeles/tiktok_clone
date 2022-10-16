@@ -73,7 +73,17 @@
                     }
                 }
             }
-
+            .dropdown {
+                margin-left: auto;
+                button {
+                    border: none;
+                    background-color: var(--color-white);
+                    img {
+                        width: 25px;
+                        height: 25px;
+                    }
+                }
+            }
             .btn {
                 margin-left: auto;
             }
@@ -114,12 +124,10 @@
         
         .comment-form {
             display: flex;
-            align-items: center;
             justify-content: center;
-            padding-bottom: 32px;
+            padding-bottom: 16px;
             padding-left: 32px;
-            padding-right: 32px;
-            flex: 0 0 60px;
+            padding-right: 16px;
             input {
                 height: 40px;
                 flex: 1 1 auto;

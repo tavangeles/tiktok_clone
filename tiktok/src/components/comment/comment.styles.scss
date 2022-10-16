@@ -6,6 +6,24 @@
         .name {
             font-weight: 600;
             font-family: "Poppins", sans-serif;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+            .creator {
+                position: relative;
+                font-size: 14px;
+                margin-left: 12px;
+                color: var(--color-primary-1);
+                &:before {
+                    content: " . ";
+                    position:absolute;
+                    left: -8px;
+                    top: -4px;
+                    color: var(--color-black);
+                    font-weight: 800;
+                }
+            }
         }
         .comment {
             color: #252429;
@@ -15,7 +33,6 @@
             color: #b2b2b2;
             font-size: 14px;
         }
-
     }
 
     .like-btn {

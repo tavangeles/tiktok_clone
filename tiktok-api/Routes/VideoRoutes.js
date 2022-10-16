@@ -22,11 +22,11 @@ Router.get("/videos/search/:search", function (req, res) {
     new VideoController().search(req, res);
 });
 
-Router.get("/videos/foryou", function (req, res) {
+Router.get("/videos/foryou/:pageNumber", function (req, res) {
     new VideoController().getVideosForYou(req, res);
 });
 
-Router.get("/videos/following", function (req, res) {
+Router.get("/videos/following/:pageNumber", function (req, res) {
     new VideoController().getVideosFollowing(req, res);
 });
 

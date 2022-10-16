@@ -1,11 +1,11 @@
 import { makeRequest } from "./makeRequest";
 
-export function getVideosForYou() {
-    return makeRequest("/videos/foryou");
+export function getVideosForYou(pageNumber) {
+    return makeRequest(`/videos/foryou/${pageNumber}`);
 }
 
-export function getVidoesFollowing() {
-    return makeRequest("/videos/following");
+export function getVidoesFollowing(pageNumber) {
+    return makeRequest(`/videos/following/${pageNumber}`);
 }
 
 export function uploadVideo(formFields, setUploadPercentage) {

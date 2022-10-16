@@ -111,7 +111,8 @@ class Videos {
 
     async getVideosForYou(req, res) {
         const userId = req.session.userDetails?.userId;
-        const videos = await this.video.getVideosForYou(userId);
+        const { pageNumber } = req.params;
+        const videos = await this.video.getVideosForYou(userId, pageNumber);
         res.json({
             success: true,
             errorMessage: [],
@@ -121,7 +122,8 @@ class Videos {
 
     async getVideosFollowing(req, res) {
         const userId = req.session.userDetails?.userId;
-        const videos = await this.video.getVideosFollowing(userId);
+        const { pageNumber } = req.params;
+        const videos = await this.video.getVideosFollowing(userId, pageNumber);
         res.json({
             success: true,
             errorMessage: [],

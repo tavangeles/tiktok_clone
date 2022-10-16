@@ -1,10 +1,17 @@
 .user {
     div {
         .username {
+            display: flex;
+            gap: 2px;
             font-family: "Poppins", sans-serif;
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
+            .verified img {
+                background-color: transparent;
+                width: 16px;
+                height: 16px;
+            }
         }
         .name {
             font-size: 14px;

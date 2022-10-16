@@ -89,38 +89,48 @@ const Search = () => {
     return (
         <>
             <div className="search-container">
-                <h2>Accounts</h2>
-                <div className="search-accounts-container">
-                    {
-                        users.map(user => {
-                            return <AccountFullDetails user={user} />
-                        })
-                    }
-                </div>
-                <h2>Videos</h2>
-                <div className="search-videos-container">
-                    {
-                        videos.map((video) => {
-                            return <div key={video.videoId}
-                                className="video-card"
-                                onClick={() =>handleVideoClick(video)}
-                            >
-                                <video loop
-                                    muted
-                                    onMouseOver={handleMouseOver}
-                                    onMouseOut={handleMouseOut}
-                                >
-                                    <source src={`${process.env.REACT_APP_API_URL}videos/${video.videoUrl}`} type="video/mp4" />
-                                </video>
-                                <p className="caption">{video.caption}</p>
-                                <div className="video-details">
-                                    <ProfilePicture imageUrl={video.imageUrl} diameter={"24px"} />
-                                    <p className="username">{video.username}</p>
-                                </div>
-                            </div>
-                        })
-                    }
-                </div>
+                {
+                    users.length > 0 && 
+                    <>
+                        <h2>Accounts</h2>
+                        <div className="search-accounts-container">
+                        {
+                            users.map(user => {
+                                return <AccountFullDetails user={user} />
+                            })
+                        }
+                        </div>
+                    </>
+                }
+                {
+                    videos.length > 0 &&
+                    <>
+                        <h2>Videos</h2>
+                        <div className="search-videos-container">
+                            {
+                                videos.map((video) => {
+                                    return <div key={video.videoId}
+                                        className="video-card"
+                                        onClick={() => handleVideoClick(video)}
+                                    >
+                                        <video loop
+                                            muted
+                                            onMouseOver={handleMouseOver}
+                                            onMouseOut={handleMouseOut}
+                                        >
+                                            <source src={`${process.env.REACT_APP_API_URL}videos/${video.videoUrl}`} type="video/mp4" />
+                                        </video>
+                                        <p className="caption">{video.caption}</p>
+                                        <div className="video-details">
+                                            <ProfilePicture imageUrl={video.imageUrl} diameter={"24px"} />
+                                            <p className="username">{video.username}</p>
+                                        </div>
+                                    </div>
+                                })
+                            }
+                        </div>
+                    </>
+                }
             </div>
             {isFullVideoOpen && <VideoFullScreen video={videos.find(video => video.videoId === selectedVideoId )} onCloseHandler={handleVideoClick} onFollowHandler={handleFollowUser} onLikeHandler={handleLikeClick} />}
         </>

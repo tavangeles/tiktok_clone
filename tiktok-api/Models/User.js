@@ -26,7 +26,7 @@ class User extends Database {
 
     getSuggestedAccounts(userId = "") {
         return this.getAll(
-            `SELECT u.id, 
+            `SELECT DISTINCT u.id, 
                 u.username, 
                 u.name, 
                 u.image_url as imageUrl, 
@@ -43,7 +43,7 @@ class User extends Database {
     
     getFollowingAccounts(userId) {
          return this.getAll(
-            `SELECT u.id, 
+            `SELECT DISTINCT u.id, 
                 u.username, 
                 u.name, 
                 u.image_url as imageUrl

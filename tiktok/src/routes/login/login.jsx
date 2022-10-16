@@ -15,6 +15,7 @@ const Login = () => {
     const setUser = useUserUpdateContext();
     const setPage = usePageUpdateContext();
     const [formFields, setFormFields] = useState(defaultFormFields);
+    const [errorMessages, setErrorMessages] = useState({});
     const { username, password } = formFields;
     const isReady = username.length > 0 && password.length > 0;
     const navigate = useNavigate();
@@ -40,10 +41,14 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         userLogin(formFields).then(res => {
-            if (res.success) {
-                setUser(res.userDetails);
-                navigate("/");
+            if (!res.success) {
+                setErrorMessages(res.errorMessage.reduce((object, error) => 
+                    ({ ...object, [error[0]]: error[1] }), {}));
+                return;
             }
+
+            setUser(res.userDetails);
+            navigate("/");
         })
     }
 
@@ -64,6 +69,7 @@ const Login = () => {
                     value={username}
                     autoComplete="none"
                 />
+                {errorMessages?.username && <p className="error-message">{errorMessages.username}</p>}
                 <input
                     type="password"
                     name="password"
@@ -72,6 +78,7 @@ const Login = () => {
                     value={password}
                     autoComplete="none"
                 />
+                {errorMessages?.password && <p className="error-message">{errorMessages.password}</p>}
                 <button className={isReady ? "btn-primary" : "btn-disabled"}>Log in</button>
             </form>
             <div className="footer">

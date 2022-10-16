@@ -46,6 +46,13 @@
             font-weight: 600;
             cursor: pointer;
         }
+
+        .error-message {
+            margin: 0;
+            padding: 0;
+            color: #d9534f;
+        }
+        
         .btn-primary {
             background-color: #fc2c53;
             color: white;

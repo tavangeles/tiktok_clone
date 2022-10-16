@@ -22,18 +22,19 @@ class Users {
         const validationErrors = [];
         //move this validation to another function inside model
         if (!name) {
-            validationErrors.push("Email address is required.");
+            validationErrors.push(["name", "Name is required."]);
         }
         if (!username) {
-            validationErrors.push("Username is required");
+            validationErrors.push(["username", "Username is required"]);
         }
-        // if (!emailAddress) {
-        //     validationErrors.push("Email is required.");
-        // }
+
         if (!password) {
-            validationErrors.push("Password is required.");
+            validationErrors.push(["password", "Password is required."]);
         }
-        //add validation if email and username already exists
+
+        if (await this.user.getUserByUsername(username)) {
+            validationErrors.push(["username", "Username is already taken."]);
+        }
 
         if (validationErrors.length > 0) {
             res.json({
@@ -174,10 +175,10 @@ class Users {
         let validationErrors = [];
         //move this validation to another function inside model
         if (!username) {
-            validationErrors.push("Username is required.");
+            validationErrors.push(["username", "Username is required."]);
         }
         if (!password) {
-            validationErrors.push("Password is required.");
+            validationErrors.push(["password", "Password is required."]);
         }
 
         if (validationErrors.length > 0) {
@@ -190,7 +191,7 @@ class Users {
         
         const user = await this.user.getUserByUsername(username);
         if (!user || !this.user.verifyPassword(password, user.password)) {
-            validationErrors.push("Invalid username/password combination.");
+            validationErrors.push(["password", "Invalid username/password combination."]);
             res.json({
                 success: false,
                 errorMessage: validationErrors

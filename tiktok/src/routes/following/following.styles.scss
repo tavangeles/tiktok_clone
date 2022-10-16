@@ -1,6 +1,7 @@
 .following-container {
     display: flex;
     flex-direction: column;
-    margin: 0 40px;
+    // margin: 0 40px;
+    width: 70%;
     min-height: calc(100vh - 64px);
 }

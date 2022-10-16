@@ -16,8 +16,10 @@ const Register = () => {
     const setPage = usePageUpdateContext();
     const setUser = useUserUpdateContext();
     const [formFields, setFormFields] = useState(defaultFormFields);
+    const [errorMessages, setErrorMessages] = useState({});
     const { name, username, password } = formFields;
-    const isReady = name.length > 0 && username.length > 0 && password.length > 0;
+    let isReady = name.length > 0 && username.length > 0 && password.length > 0;
+    isReady = true;
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -38,10 +40,15 @@ const Register = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         userRegister(formFields).then(res => {
-            if (res.success) {
-                setUser(res.userDetails);
-                navigate("/");
+            if (!res.success) {
+                setErrorMessages(res.errorMessage.reduce((object, error) => 
+                    ({ ...object, [error[0]]: error[1] }), {}));
+                return;
             }
+
+            setUser(res.userDetails);
+            navigate("/");
+
         })
     }
 
@@ -62,6 +69,7 @@ const Register = () => {
                     value={name}
                     autoComplete="off"
                 />
+                {errorMessages?.name && <p className="error-message">{errorMessages.name}</p>}
                 <p>Username</p>
                 <input
                     type="text"
@@ -71,6 +79,7 @@ const Register = () => {
                     value={username}
                     autoComplete="off"
                 />
+                {errorMessages?.username && <p className="error-message">{errorMessages.username}</p>}
                 <input
                     type="password"
                     name="password"
@@ -79,6 +88,7 @@ const Register = () => {
                     value={password}
                     autoComplete="off"
                 />
+                {errorMessages?.password && <p className="error-message">{errorMessages.password}</p>}
                 <button className={isReady ? "btn-primary" : "btn-disabled"}>Sign Up</button>
             </form>
             <div className="footer">

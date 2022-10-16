@@ -6,6 +6,9 @@
     gap: 32px;
     min-height: calc(100vh - 64px);
     padding: 0 8px;
+    .sidebar {
+        width: 15%;    
+    }
     .container {
         width: 100%;
         display: flex;
